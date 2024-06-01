@@ -7,38 +7,82 @@
     <title>Gestión de alertas</title>
 </head>
 
-<body style="background-color: #000;">
+<body>
     <div>
         <div>
-            <a href="#">Ingresos mensuales por categoria</a>
-            <a href="#">Egresos mensuales por categoria</a>
+            <a href="javascript:void(0);" onclick="mostrarAgregarAlerta()">Agregar alertas</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarAlerta()">Consultar, actualizar o eliminar alertas</a>
         </div>
-        <div class="topic-container">
+        <div class="topic-container"></div>
+    </div>
+    <div id="add-alert" class="add-alert">
+        <div>
+            <span>Codigo de alerta:</span>
+            <input type="text" id="codigoAlerta">
+            <span>Tipo de alerta:</span>
+            <select id="tipoAlerta">
+                <option value="Factura">Factura</option>
+                <option value="Impuesto">Impuesto</option>
+                <option value="Saldo Minimo">Saldo Minimo</option>
+            </select>
+            <span>Opciones de repeticion</span>
+            <select id="opcionRepeticion">
+                <option value="Una vez">Una vez</option>
+                <option value="Diariamente">Diariamente</option>
+                <option value="Semanal">Semanal</option>
+                <option value="Mensual">Mensual</option>
+            </select>
+        </div>
+        <div>
+            <span>Fecha de la alerta:</span>
+            <input type="date" id="fechaAlerta">
+            <span>Hora de la alerta:</span>
+            <input type="time" id="horaAlerta">
+        </div>
+        <div>
+            <span>Descripcion:</span>
+            <textarea id="descripcionAlerta"></textarea> <br>
+            <button onclick="guardarAlerta()">Guardar alerta</button>
+        </div>
+    </div>
+    <div id="edit-alert" class="edit-alert" style="display: none;">
+        <div>
+            <span>Codigo de alerta:</span>
+            <input type="text" id="buscarCodigoAlerta">
+            <button onclick="consultarAlerta()">Consultar</button>
+        </div>
+        <div>
+            <span>Tipo de alerta:</span>
+            <select id="editTipoAlerta">
+                <option value="Factura">Factura</option>
+                <option value="Impuesto">Impuesto</option>
+                <option value="Saldo Minimo">Saldo Minimo</option>
+            </select>
+            <span>Opciones de repeticion</span>
+            <select id="editOpcionRepeticion">
+                <option value="Una vez">Una vez</option>
+                <option value="Diariamente">Diariamente</option>
+                <option value="Semanal">Semanal</option>
+                <option value="Mensual">Mensual</option>
+            </select>
+        </div>
+        <div>
+            <span>Fecha de la alerta:</span>
+            <input type="date" id="editFechaAlerta">
+            <span>Hora de la alerta:</span>
+            <input type="time" id="editHoraAlerta">
+        </div>
+        <div>
+            <span>Descripcion:</span>
+            <textarea id="editDescripcionAlerta"></textarea> <br>
+            <button onclick="actualizarAlerta()">Actualizar alerta</button>
+            <button onclick="eliminarAlerta()">Eliminar alerta</button>
+        </div>
+    </div>
 
-        </div>
-    </div>
-    <div class="custom-select">
-        <div class="select-selected">Seleccione meses</div>
-        <div class="select-items">
-            <div data-value="0">Enero</div>
-            <div data-value="1">Febrero</div>
-            <div data-value="2">Marzo</div>
-            <div data-value="3">Abril</div>
-            <div data-value="4">Mayo</div>
-            <div data-value="5">Junio</div>
-            <div data-value="6">Julio</div>
-            <div data-value="7">Agosto</div>
-            <div data-value="8">Septiembre</div>
-            <div data-value="9">Octubre</div>
-            <div data-value="10">Noviembre</div>
-            <div data-value="11">Diciembre</div>
-        </div>
-    </div>
-    <div>
-        <canvas id="myBarChart" width="400" height="100"></canvas>
-    </div>
-    
+    <audio id="alertaSonido" src="../recursos/audio/nicolas (mp3cut.net).mp3" preload="auto"></audio>
+
+    <script src="../js/gestionalertas.js"></script>
 </body>
-<script src="../js/analisis.js"></script>
 
 </html>
