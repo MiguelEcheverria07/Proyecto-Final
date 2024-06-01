@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de cuentas bancarias</title>
+    <link rel="stylesheet" href="../css/estiloscuentas.css">
+</head>
+
+<body>
+    <div class="menu">
+        <div>
+            <a href="javascript:void(0);" onclick="mostrarAgregarCuenta()">Agregar cuentas bancarias</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarCuenta()" style="border-left: 1px solid;">Consultar, actualizar o eliminar cuentas bancarias</a>
+        </div>
+        <div id="topic-container"></div>
+    </div>
+    <div id="add-account" class="add-account">
+        <div>
+            <span>Numero de cuenta:</span>
+            <input type="text" id="numeroCuenta">
+            <span>Nombre del banco:</span>
+            <input type="text" id="nombreBanco">
+            <span>Tipo de cuenta:</span>
+            <select id="tipoCuenta">
+                <option value="Ahorros">Cuenta de ahorros</option>
+                <option value="Corriente">Cuenta Corriente</option>
+                <option value="Empresarial">Cuenta Empresarial</option>
+                <option value="Nomina">Cuenta de Nomina</option>
+                <option value="Inversion">Cuenta de Inversion</option>
+            </select>
+        </div>
+        <div>
+            <span>Estado de la cuenta:</span>
+            <input type="text" id="estadoCuenta" readonly placeholder="Activa">
+            <span>Fecha de apertura:</span>
+            <input type="date" id="fechaCuenta">
+            <span>Saldo actual:</span>
+            <input type="number" id="saldoCuenta">
+        </div>
+        <div>
+            <span>Descripcion</span>
+            <textarea id="descripcionCuenta"></textarea>
+            <button onclick="guardarCuenta()">Guardar cuenta</button>
+        </div>
+    </div>
+    <div id="edit-account" class="edit-account" style="display: none;">
+        <div>
+            <span>Ingrese el numero de cuenta:</span>
+            <input type="text" id="buscarNumeroCuenta">
+            <button onclick="consultarCuenta()">Consultar</button>
+        </div>
+        <div>
+            <span>Nombre del banco:</span>
+            <input type="text" id="editNombreBanco">
+            <span>Tipo de cuenta:</span>
+            <select id="editTipoCuenta">
+                <option value="Ahorros">Cuenta de ahorros</option>
+                <option value="Corriente">Cuenta Corriente</option>
+                <option value="Empresarial">Cuenta Empresarial</option>
+                <option value="Nomina">Cuenta de Nomina</option>
+                <option value="Inversion">Cuenta de Inversion</option>
+            </select>
+            <span>Saldo actual:</span>
+            <input type="number" id="editSaldoCuenta">
+        </div>
+        <div>
+            <span>Estado de la cuenta:</span>
+            <select id="editEstadoCuenta">
+                <option value="Activa">Activa</option>
+                <option value="Inactiva">Inactiva</option>
+                <option value="Cerrada">Cerrada</option>
+            </select>
+            <span>Fecha de apertura:</span>
+            <input type="date" id="editFechaCuenta">
+        </div>
+        <div>
+            <span>Descripcion</span>
+            <textarea id="editDescripcionCuenta"></textarea><br>
+            <button onclick="actualizarCuenta()">Actualizar cuenta</button>
+            <button onclick="eliminarCuenta()">Eliminar cuenta</button>
+        </div>
+</body>
+<script src="../js/gestioncuentas.js"></script>
+</html>

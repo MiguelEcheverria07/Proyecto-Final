@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de gastos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #myBarChart {
+            max-height: 300px;
+        }
+
+        .select-hide{
+            display: block;
+        }
+
+        .custom-select {
+            display: inline-block;
+            position: relative;
+            font-size: 16px;
+        }
+   
+        .select-selected {
+            background-color: #1a1a1a;
+            display: block;
+            color: #ccc;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .select-selected:hover {
+            background-color: #333;
+        }
+
+        .select-items {
+            position: absolute;
+            background-color: #1a1a1a;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Estilos personalizados para la barra deslizadora */
+        .select-items::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .select-items::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 5px;
+        }
+
+        .select-items::-webkit-scrollbar-thumb {
+            background: #6200ea;
+            border-radius: 5px;
+        }
+
+        .select-items::-webkit-scrollbar-thumb:hover {
+            background: #bb86fc;
+        }
+
+        .select-items div,
+        .select-selected {
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .select-items div:hover,
+        .select-items div.selected {
+            background-color: #6200ea;
+            box-shadow: 0 0 20px rgba(98, 0, 234, 1);
+        }
+
+        canvas {
+            margin-top: 15%;
+        }
+    </style>
+</head>
+
+<body style="background-color: #000;">
+    <div>
+        <div>
+            <a href="#">Ingresos mensuales por categoria</a>
+            <a href="#">Egresos mensuales por categoria</a>
+        </div>
+        <div class="topic-container">
+
+        </div>
+    </div>
+            <div class="custom-select">
+                <div class="select-selected">Seleccione meses</div>
+                <div class="select-items">
+                    <div data-value="0">Enero</div>
+                    <div data-value="1">Febrero</div>
+                    <div data-value="2">Marzo</div>
+                    <div data-value="3">Abril</div>
+                    <div data-value="4">Mayo</div>
+                    <div data-value="5">Junio</div>
+                    <div data-value="6">Julio</div>
+                    <div data-value="7">Agosto</div>
+                    <div data-value="8">Septiembre</div>
+                    <div data-value="9">Octubre</div>
+                    <div data-value="10">Noviembre</div>
+                    <div data-value="11">Diciembre</div>
+                </div>
+            </div>
+        <div>
+            <canvas id="myBarChart" width="400" height="100"></canvas>
+        </div>
+    </div>
+    
+</body>
+<script src="../js/analisis.js"></script>
+
+</html>

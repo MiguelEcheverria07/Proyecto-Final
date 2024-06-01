@@ -1,0 +1,47 @@
+body {}
+
+a,
+span {
+    text-decoration: none;
+    color: black;
+}
+
+.menu>div>a {
+    padding:100% 20px;
+}
+
+.menu {
+    padding: 10px;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+.add-account {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+    gap: 70px;
+    border: 1px solid black;
+}
+
+.edit-account{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+    gap: 50px;
+    border: 1px solid black;
+}
+
+.edit-account>div, .add-account>div{
+    display: flex;
+    gap: 20px;
+}
+
+
+
+
+

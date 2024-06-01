@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de transacciones a nivel de ingresos y egresos</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()">Agregar transaccion</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()">Consultar, actualizar o eliminar transacciones</a>
+        </div>
+        <div class="topic-container"></div>
+    </div>
+    <div id="add-trade" class="add-trade">
+        <div>
+            <span>Codigo de transaccion:</span>
+            <input type="text" id="codigoTransaccion">
+            <span>Tipo de transaccion:</span>
+            <select id="tipoTransaccion">
+                <option value="Ingreso">Ingreso</option>
+                <option value="Egreso">Egreso</option>
+            </select>
+            <span>Tipo de ingreso o egreso asociado:</span>
+            <select id="tipoAsociado"></select>
+        </div>
+        <div>
+            <span>Cuenta bancaria relacionada:</span>
+            <select id="cuentaAsociada"></select>
+            <span>Valor de la transaccion:</span>
+            <input type="number" id="valorTransaccion">
+        </div>
+        <div>
+            <span>Descripcion</span>
+            <textarea id="descripcionTransaccion"></textarea> <br>
+            <button onclick="guardarTransaccion()">Guardar transaccion</button>
+        </div>
+    </div>
+    <div id="edit-trade" class="edit-trade" style="display: none;">
+        <div>
+            <span>Ingrese el codigo:</span>
+            <input type="text" id="buscarCodigoTransaccion">
+            <button onclick="consultarTransaccion()">Consultar</button>
+        </div>
+        <div>
+            <span>Tipo de transaccion:</span>
+            <select id="editTipoTransaccion">
+                <option value="Ingreso">Ingreso</option>
+                <option value="Egreso">Egreso</option>
+            </select>
+            <span>Tipo de ingreso o egreso asociado:</span>
+            <select id="editTipoAsociado"></select>
+        </div>
+        <div>
+            <span>Cuenta bancaria relacionada:</span>
+            <select id="editCuentaAsociada"></select>
+            <span>Valor de la transaccion:</span>
+            <input type="number" id="editValorTransaccion">
+        </div>
+        <div>
+            <span>Descripcion</span>
+            <textarea id="editDescripcionTransaccion"></textarea> <br>
+            <button onclick="actualizarTransaccion()">Actualizar transaccion</button>
+            <button onclick="eliminarTransaccion()">Eliminar transaccion</button>
+        </div>
+    </div>
+    <script src="../js/gestionstransacciones.js"></script>
+</body>
+
+</html>
