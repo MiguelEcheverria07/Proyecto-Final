@@ -35,8 +35,16 @@ function limpiarInputsTipo() {
 }
 
 function guardarTipo() {
+    const codigoTipo = codigoTipoInput.value;
+    const tipoExistente = Object.keys(localStorage).some(key => key.startsWith('tipo') && JSON.parse(localStorage.getItem(key)).codigo === codigoTipo);
+
+    if (tipoExistente) {
+        alert('Ya existe un tipo con el mismo código.');
+        return;
+    }
+
     const tipo = {
-        codigo: codigoTipoInput.value,
+        codigo: codigoTipo,
         nombre: nombreTipoInput.value,
         tipo: tipoInput.value,
         categoria: categoriaInput.value,
@@ -46,6 +54,7 @@ function guardarTipo() {
     alert('Tipo guardado exitosamente');
     limpiarInputsTipo(); 
 }
+
 
 function consultarTipo() {
     const codigoTipo = buscarCodigoTipoInput.value;

@@ -5,31 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de transacciones</title>
+    <link rel="stylesheet" href="../css/estiloshistorial.css">
 </head>
 
 <body>
     <div>
-        <div></div>
+        <div>
+            <span>Filtros de búsqueda |</span>
+            <span>Categoria:</span>
+            <select name="" id="categoriaSelect">
+                <option value="Todas">Todas</option>
+                <!-- Aquí se deben cargar las categorías creadas -->
+            </select>
+            <span>Tipo:</span>
+            <select name="" id="tipoSelect">
+                <option value="">Todos</option>
+                <option value="Ingreso">Ingreso</option>
+                <option value="Egreso">Egreso</option>
+            </select>
+        </div>
         <div class="topic-container">
-
+            <!-- NO TOCAR -->
         </div>
     </div>
     <div>
         <span>Desde:</span>
-        <input type="date" name="" id="">
+        <input type="date" name="" id="desdeInput">
         <span>Hasta</span>
-        <input type="date" name="" id="">
+        <input type="date" name="" id="hastaInput">
     </div>
     <div>
-        <table>
+        <table id="transaccionesTable">
             <tr>
-                <th>Tipo de transaccion</th>
-                <th>Categoria de la transaccion</th>
-                <th>Monto de la transaccion</th>
-                <th>Fecha de la transaccion</th>
+                <th>Tipo de transacción</th>
+                <th>Categoria de la transacción</th>
+                <th>Monto de la transacción</th>
+                <th>Fecha de la transacción</th>
             </tr>
+            <!-- Las transacciones se agregarán aquí -->
         </table>
     </div>
 </body>
+<script src="../js/historial.js"></script>
+<script src="../js/temas.js"></script>
 
 </html>

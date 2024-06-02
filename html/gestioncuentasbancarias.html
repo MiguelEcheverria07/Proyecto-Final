@@ -5,16 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de cuentas bancarias</title>
-    <link rel="stylesheet" href="../css/estiloscuentas.css">
+    <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
 </head>
 
-<body>
+<body onload="desactivarHojaPorDefecto()">
     <div class="menu">
         <div>
             <a href="javascript:void(0);" onclick="mostrarAgregarCuenta()">Agregar cuentas bancarias</a>
-            <a href="javascript:void(0);" onclick="mostrarEditarCuenta()" style="border-left: 1px solid;">Consultar, actualizar o eliminar cuentas bancarias</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarCuenta()">Consultar, actualizar o eliminar cuentas bancarias</a>
         </div>
-        <div id="topic-container"></div>
+        <div id="topic-container">
+            <span>Temas:</span>
+            <select name="" id="">
+                <option value="Segoe UI">Segoe UI</option>
+                <option value="Cursiva">Cursiva</option>
+                <option value="Cambria">Cambria</option>
+            </select>
+            <select name="" id="seleccionarTema" onchange="cambiarHojaDeEstilos()">
+                <option value="temaClaro">Tema claro</option>
+                <option value="temaOscuro">Tema oscuro</option>
+                <option value="ema ???">Tema ???</option>
+            </select>
+        </div>
     </div>
     <div id="add-account" class="add-account">
         <div>
@@ -83,4 +96,5 @@
         </div>
 </body>
 <script src="../js/gestioncuentas.js"></script>
+<script src="../js/temas.js"></script>
 </html>

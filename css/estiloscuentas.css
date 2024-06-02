@@ -1,4 +1,7 @@
-body {}
+body {
+    transition: all 0.3s;
+
+}
 
 a,
 span {
@@ -6,13 +9,30 @@ span {
     color: black;
 }
 
+div{
+    margin-left: 10px;
+}
+button{
+    padding: 5px 20px;
+}
+
+input, select{
+    padding:5px ;
+}
+
 .menu>div>a {
     padding:100% 20px;
 }
 
+.menu>div:first-child{
+    border-bottom: 1px solid;
+}
+
 .menu {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 300px;
     padding: 10px;
-    border: 1px solid black;
     overflow: hidden;
 }
 
@@ -23,7 +43,6 @@ span {
     justify-content: center;
     height: 300px;
     gap: 70px;
-    border: 1px solid black;
 }
 
 .edit-account{
@@ -33,7 +52,6 @@ span {
     justify-content: center;
     height: 300px;
     gap: 50px;
-    border: 1px solid black;
 }
 
 .edit-account>div, .add-account>div{

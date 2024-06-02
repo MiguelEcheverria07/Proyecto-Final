@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de transacciones a nivel de ingresos y egresos</title>
+    <link rel="stylesheet" href="../css/estiloshistorial.css">
 </head>
 
 <body>
@@ -13,7 +14,9 @@
             <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()">Agregar transaccion</a>
             <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()">Consultar, actualizar o eliminar transacciones</a>
         </div>
-        <div class="topic-container"></div>
+        <div class="topic-container">
+            
+        </div>
     </div>
     <div id="add-trade" class="add-trade">
         <div>
@@ -32,10 +35,12 @@
             <select id="cuentaAsociada"></select>
             <span>Valor de la transaccion:</span>
             <input type="number" id="valorTransaccion">
+            <span>Fecha de la transaccion:</span>
+            <input type="date" name="" id="fechaTransaccion">
         </div>
         <div>
-            <span>Descripcion</span>
-            <textarea id="descripcionTransaccion"></textarea> <br>
+            <span>Descripcion</span> <br>
+            <textarea id="descripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> <br>
             <button onclick="guardarTransaccion()">Guardar transaccion</button>
         </div>
     </div>
@@ -53,6 +58,8 @@
             </select>
             <span>Tipo de ingreso o egreso asociado:</span>
             <select id="editTipoAsociado"></select>
+            <span>Fecha de la transaccion:</span>
+            <input type="date" name="" id="editFechaTransaccion">
         </div>
         <div>
             <span>Cuenta bancaria relacionada:</span>
@@ -61,8 +68,8 @@
             <input type="number" id="editValorTransaccion">
         </div>
         <div>
-            <span>Descripcion</span>
-            <textarea id="editDescripcionTransaccion"></textarea> <br>
+            <span>Descripcion</span> <br>
+            <textarea id="editDescripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> <br>
             <button onclick="actualizarTransaccion()">Actualizar transaccion</button>
             <button onclick="eliminarTransaccion()">Eliminar transaccion</button>
         </div>

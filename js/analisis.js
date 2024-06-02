@@ -1,155 +1,109 @@
-const allLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-let transactions = {
-    Ingresos: {},
-    Egresos: {}
-};
+// Obtener todas las transacciones del localStorage
+const transacciones = Object.keys(localStorage)
+    .filter(key => key.startsWith('transaccion'))
+    .map(key => JSON.parse(localStorage.getItem(key)));
 
-// Example structure for transactions:
-// transactions = {
-//     Ingresos: {
-//         '2023-05': {
-//             Salario: 10000,
-//             Bono: 500
-//         }
-//     },
-//     Egresos: {
-//         '2023-05': {
-//             Renta: 300,
-//             Subsidio: 200
-//         }
-//     }
-// };
+// Obtener el contexto del canvas
+const ctx = document.getElementById('myBarChart').getContext('2d');
 
-const categories = ['Salario', 'Bono', 'Renta', 'Subsidio'];
+// Obtener todas las categorías de los tipos del localStorage
+const categorias = Object.keys(localStorage)
+    .filter(key => key.startsWith('tipo'))
+    .map(key => {
+        const tipoStr = localStorage.getItem(key);
+        const tipo = JSON.parse(tipoStr);
+        return tipo.categoria;
+    });
 
-const datasets = categories.map(category => ({
-    label: category,
-    data: [],
-    backgroundColor: '',
-    borderColor: '',
+// Generar un color aleatorio para cada categoría
+const colores = categorias.map(() => {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return `rgba(${r}, ${g}, ${b}, 0.5)`;
+});
+
+// Crear un dataset para cada categoría
+const datasets = categorias.map((categoria, index) => ({
+    label: categoria,
+    data: [], // Inicialmente, no hay datos
+    backgroundColor: colores[index],
+    borderColor: colores[index].replace('0.5', '1'),
     borderWidth: 1
 }));
 
-const colors = {
-    Salario: ['rgba(37, 2, 82, 0.7)', 'rgba(123, 104, 238, 1)'], // Púrpura neón
-    Bono: ['rgba(150, 0, 11, 0.7)', 'rgba(255, 99, 71, 1)'], // Rojo neón
-    Renta: ['rgba(11, 92, 4, 0.7)', 'rgba(50, 205, 50, 1)'], // Verde neón
-    Subsidio: ['rgba(0, 191, 255, 0.7)', 'rgba(0, 191, 255, 1)'] // Azul neón
-};
-
-categories.forEach((category, index) => {
-    datasets[index].backgroundColor = colors[category][0];
-    datasets[index].borderColor = colors[category][1];
-});
-
-const config = {
+// Crear la gráfica de barras
+const myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [],
+        labels: [], // Inicialmente, no hay etiquetas en el eje x
         datasets: datasets
     },
     options: {
         scales: {
-            y: {
+            x: {
                 beginAtZero: true,
-                ticks: {
-                    color: 'rgba(255, 255, 255, 0.8)' // Color blanco claro para los números en el eje y
-                },
-                grid: {
-                    color: 'rgba(255, 255, 255, 0.1)' // Color blanco claro para las líneas de la cuadrícula
+                title: {
+                    display: true,
+                    text: ''
                 }
             },
-            x: {
-                ticks: {
-                    color: 'rgba(255, 255, 255, 0.8)' // Color blanco claro para los números en el eje x
-                },
-                grid: {
-                    color: 'rgba(255, 255, 255, 0.1)' // Color blanco claro para las líneas de la cuadrícula
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                labels: {
-                    color: 'rgba(255, 255, 255, 0.8)' // Color blanco claro para las etiquetas de la leyenda
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Valor'
                 }
             }
         }
     }
-};
+});
 
-const myBarChart = new Chart(
-    document.getElementById('myBarChart'),
-    config
-);
-
-// Function to update chart with dynamic data
-function updateChart() {
-    const selectedMonth = Array.from(document.querySelectorAll('.select-items div.selected')).map(div => parseInt(div.getAttribute('data-value')));
-    
-    const selectedCategory = "Ingresos"; // This can be "Ingresos" or "Egresos" based on your selection
-
-    const newLabels = selectedMonth.map(monthIndex => allLabels[monthIndex]);
-    const newDatasets = datasets.map(dataset => ({
-        ...dataset,
-        data: selectedMonth.map(monthIndex => {
-            const monthKey = `2023-${String(monthIndex + 1).padStart(2, '0')}`;
-            return transactions[selectedCategory][monthKey] && transactions[selectedCategory][monthKey][dataset.label] ? transactions[selectedCategory][monthKey][dataset.label] : 0;
-        })
-    }));
-
-    myBarChart.data.labels = newLabels;
-    myBarChart.data.datasets.forEach((dataset, index) => {
-        dataset.data = newDatasets[index].data;
+// Función para actualizar los datos del gráfico según el mes seleccionado
+function actualizarGraficoPorMes(mesSeleccionado) {
+    // Resetear los datos de los datasets
+    myBarChart.data.datasets.forEach(dataset => {
+        dataset.data = []; // Reiniciar los datos
     });
 
+    // Agregar las etiquetas del mes seleccionado
+    myBarChart.data.labels = [obtenerNombreMes(mesSeleccionado)];
+
+    // Filtrar las transacciones por el mes seleccionado y actualizar los datasets
+    transacciones.forEach(transaccion => {
+        const tipoStr = localStorage.getItem('tipo' + transaccion.tipoAsociado);
+        const tipo = JSON.parse(tipoStr);
+        const mes = obtenerMes(transaccion.fechaTransaccion);
+        if (mesSeleccionado === mes) {
+            const dataset = myBarChart.data.datasets.find(dataset => dataset.label === tipo.categoria);
+            dataset.data[0] = transaccion.valor;
+        }
+    });
+
+    // Actualizar la gráfica
     myBarChart.update();
 }
 
-// Function to add a transaction
-function addTransaction(category, type, month, amount) {
-    const monthKey = `2023-${String(month + 1).padStart(2, '0')}`;
-
-    if (!transactions[type][monthKey]) {
-        transactions[type][monthKey] = {};
-    }
-
-    if (!transactions[type][monthKey][category]) {
-        transactions[type][monthKey][category] = 0;
-    }
-
-    transactions[type][monthKey][category] += amount;
-
-    updateChart();
+// Función para obtener el mes como número a partir de una fecha
+function obtenerMes(fecha) {
+    const date = new Date(fecha);
+    return date.getMonth();
 }
 
-// Add example transactions
-addTransaction('Salario', 'Ingresos', 4, 10000); // Add 10,000 to "Salario" in "Ingresos" for May
+// Función para obtener el nombre del mes a partir del número del mes
+function obtenerNombreMes(mes) {
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    return meses[mes];
+}
 
-const customSelect = document.querySelector('.custom-select');
-const selectSelected = customSelect.querySelector('.select-selected');
-const selectItems = customSelect.querySelector('.select-items');
-var selectDivs = document.getElementsByClassName('select-items');
-
-selectSelected.addEventListener('click', () => {
-    selectItems.classList.toggle('select-hide');
-    selectSelected.classList.toggle('select-arrow-active');
-});
-
-selectItems.addEventListener('click', (e) => {
-    if (e.target.tagName === 'DIV') {
-        e.target.classList.toggle('selected');
-        updateChart();
+// Evento para la selección de mes
+document.querySelector('.custom-select').addEventListener('click', function (e) {
+    if (e.target.classList.contains('select-items') || e.target.parentElement.classList.contains('select-items')) {
+        const mesSeleccionado = parseInt(e.target.getAttribute('data-value'));
+        actualizarGraficoPorMes(mesSeleccionado);
     }
 });
 
-document.addEventListener('click', (e) => {
-    if (!customSelect.contains(e.target)) {
-        selectItems.classList.add('select-hide');
-        selectSelected.classList.remove('select-arrow-active');
-    }
-});
-
-updateChart();
-
-
+// Inicializar la gráfica con el mes actual
+const mesActual = new Date().getMonth();
+actualizarGraficoPorMes(mesActual);

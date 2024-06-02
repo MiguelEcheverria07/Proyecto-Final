@@ -36,8 +36,16 @@ function mostrarNotificacion(mensaje) {
 
 // Function to save alert
 function guardarAlerta() {
+    const codigoAlerta = codigoAlertaInput.value;
+    const alertaExistente = Object.keys(localStorage).some(key => key.startsWith('alerta') && JSON.parse(localStorage.getItem(key)).codigo === codigoAlerta);
+
+    if (alertaExistente) {
+        mostrarNotificacion('Ya existe una alerta con el mismo código');
+        return;
+    }
+
     const alerta = {
-        codigo: codigoAlertaInput.value,
+        codigo: codigoAlerta,
         tipoAlerta: tipoAlertaInput.value,
         opcionRepeticion: opcionRepeticionInput.value,
         fecha: fechaAlertaInput.value,
@@ -49,6 +57,7 @@ function guardarAlerta() {
     programarAlerta(alerta); 
     limpiarInputsAlerta(); 
 }
+
 
 function consultarAlerta() {
     const codigoAlerta = buscarCodigoAlertaInput.value;

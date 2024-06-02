@@ -24,20 +24,30 @@ function mostrarEditarCuenta() {
 }
 
 function guardarCuenta() {
+    const numeroCuenta = numeroCuentaInput.value;
+    const cuentaExistente = Object.keys(localStorage).some(key => key.startsWith('numeroCuenta') && JSON.parse(localStorage.getItem(key)).numeroCuenta === numeroCuenta);
+
+    if (cuentaExistente) {
+        alert('Ya existe una cuenta con el mismo número.');
+        return;
+    }
+
     const cuenta = {
-        numeroCuenta: numeroCuentaInput.value,
+        numeroCuenta: numeroCuenta,
         nombreBanco: nombreBancoInput.value,
         tipoCuenta: tipoCuentaInput.value,
-        estadoCuenta: 'Activa', 
+        estadoCuenta: 'Activa',
         fechaCuenta: fechaCuentaInput.value,
         saldoCuenta: saldoCuentaInput.value,
         descripcionCuenta: descripcionCuentaInput.value
     };
+
     localStorage.setItem('numeroCuenta' + cuenta.numeroCuenta, JSON.stringify(cuenta));
     alert('Cuenta guardada exitosamente');
-    limpiarInputs(); 
-    numeroCuentaInput.focus()
+    limpiarInputs();
+    numeroCuentaInput.focus();
 }
+
 
 function consultarCuenta() {
     const numeroCuenta = buscarNumeroCuentaInput.value;

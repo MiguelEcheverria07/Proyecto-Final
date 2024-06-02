@@ -3,6 +3,7 @@ const tipoTransaccionInput = document.getElementById('tipoTransaccion');
 const tipoAsociadoInput = document.getElementById('tipoAsociado');
 const cuentaAsociadaInput = document.getElementById('cuentaAsociada');
 const valorTransaccionInput = document.getElementById('valorTransaccion');
+const fechaTransaccionInput = document.getElementById('fechaTransaccion');
 const descripcionTransaccionInput = document.getElementById('descripcionTransaccion');
 
 const buscarCodigoTransaccionInput = document.getElementById('buscarCodigoTransaccion');
@@ -10,6 +11,7 @@ const editTipoTransaccionInput = document.getElementById('editTipoTransaccion');
 const editTipoAsociadoInput = document.getElementById('editTipoAsociado');
 const editCuentaAsociadaInput = document.getElementById('editCuentaAsociada');
 const editValorTransaccionInput = document.getElementById('editValorTransaccion');
+const editFechaTransaccionInput = document.getElementById('editFechaTransaccion');
 const editDescripcionTransaccionInput = document.getElementById('editDescripcionTransaccion');
 
 function limpiarInputsTransaccion() {
@@ -18,6 +20,7 @@ function limpiarInputsTransaccion() {
     tipoAsociadoInput.innerHTML = '';
     cuentaAsociadaInput.innerHTML = '';
     valorTransaccionInput.value = '';
+    fechaTransaccionInput.value = '';
     descripcionTransaccionInput.value = '';
 
     buscarCodigoTransaccionInput.value = '';
@@ -25,6 +28,7 @@ function limpiarInputsTransaccion() {
     editTipoAsociadoInput.innerHTML = '';
     editCuentaAsociadaInput.innerHTML = '';
     editValorTransaccionInput.value = '';
+    editFechaTransaccionInput.value = '';
     editDescripcionTransaccionInput.value = '';
 }
 
@@ -55,12 +59,21 @@ function cargarTiposYCuentas() {
 }
 
 function guardarTransaccion() {
+    const codigoTransaccion = codigoTransaccionInput.value;
+    const transaccionExistente = Object.keys(localStorage).some(key => key.startsWith('transaccion') && JSON.parse(localStorage.getItem(key)).codigo === codigoTransaccion);
+
+    if (transaccionExistente) {
+        alert('Ya existe una transacción con el mismo código.');
+        return;
+    }
+
     const transaccion = {
-        codigo: codigoTransaccionInput.value,
+        codigo: codigoTransaccion,
         tipoTransaccion: tipoTransaccionInput.value,
-        tipoAsociado: tipoAsociadoInput.value,
+        tipoAsociado: tipoAsociadoInput.value,  // Guardar el ID del tipo asociado
         cuentaAsociada: cuentaAsociadaInput.value,
         valor: valorTransaccionInput.value,
+        fechaTransaccion : fechaTransaccionInput.value,
         descripcion: descripcionTransaccionInput.value
     };
     localStorage.setItem('transaccion' + transaccion.codigo, JSON.stringify(transaccion));
@@ -68,6 +81,8 @@ function guardarTransaccion() {
     limpiarInputsTransaccion(); 
     cargarTiposYCuentas(); 
 }
+
+
 
 function consultarTransaccion() {
     const codigoTransaccion = buscarCodigoTransaccionInput.value;
@@ -79,9 +94,10 @@ function consultarTransaccion() {
         editTipoAsociadoInput.value = transaccion.tipoAsociado;
         editCuentaAsociadaInput.value = transaccion.cuentaAsociada;
         editValorTransaccionInput.value = transaccion.valor;
+        editFechaTransaccionInput.value = transaccion.fechaTransaccion;
         editDescripcionTransaccionInput.value = transaccion.descripcion;
     } else {
-        alert('No se encontró la transacción con el código proporcionado.');
+        alert('No se encontró la transacción con el código proporcionado');
     }
 }
 
@@ -93,6 +109,7 @@ function actualizarTransaccion() {
         tipoAsociado: editTipoAsociadoInput.value,
         cuentaAsociada: editCuentaAsociadaInput.value,
         valor: editValorTransaccionInput.value,
+        fechaTransaccion : editFechaTransaccionInput.value,
         descripcion: editDescripcionTransaccionInput.value
     };
     localStorage.setItem('transaccion' + codigoTransaccion, JSON.stringify(transaccion));
