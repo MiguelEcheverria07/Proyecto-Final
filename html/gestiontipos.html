@@ -5,41 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de tipos de ingresos y egresos</title>
-    <link rel="stylesheet" href="../css/estiloscuentas.css">
-    <style>
-        button{
-            padding: 8px 25px;
-        }
-
-        .add-type, .edit-type {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 300px;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
-
-        .add-type>div>input, .edit-type >div>input{
-            margin-right: 50px;
-        }
-
-        .edit-type>div:nth-of-type(2)>select{
-            margin-right: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
 </head>
 
 <body>
-    <div class="menu">
+    <div class="menu-types">
         <div>
             <a href="javascript:void(0);" onclick="mostrarAgregarTipo()">Agregar tipos de ingreso o egreso</a>
             <a href="javascript:void(0);" onclick="mostrarEditarTipo()">Consultar, actualizar o eliminar tipos de
                 ingresos o egresos</a>
         </div>
         <div class="topic-container">
-
+            <span>Fuentes y temas:</span>
+            <select id="seleccionarFuente" onchange="cambiarFuente(this.value)"></select>
+            </select>
+            <select name="" id="seleccionarTema" onchange="cambiarTema(this.value)">
+            </select>
         </div>
     </div>
     <div class="add-type" id="add-type">
@@ -90,5 +72,6 @@
     </div>
 </body>
 <script src="../js/gestiontipos.js"></script>
+<script src="../js/temas.js"></script>
 
 </html>

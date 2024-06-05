@@ -48,7 +48,6 @@ function guardarCuenta() {
     numeroCuentaInput.focus();
 }
 
-
 function consultarCuenta() {
     const numeroCuenta = buscarNumeroCuentaInput.value;
     const cuentaStr = localStorage.getItem('numeroCuenta' + numeroCuenta);
@@ -78,7 +77,7 @@ function actualizarCuenta() {
         descripcionCuenta: editDescripcionCuentaInput.value
     };
     localStorage.setItem('numeroCuenta' + numeroCuenta, JSON.stringify(cuenta));
-    alert('Cuenta actualizada exitosamente.');
+    alert('Cuenta actualizada exitosamente');
     limpiarInputs();
     buscarNumeroCuentaInput.focus();
 }
@@ -86,7 +85,7 @@ function actualizarCuenta() {
 function eliminarCuenta() {
     const numeroCuenta = buscarNumeroCuentaInput.value;
     localStorage.removeItem('numeroCuenta' + numeroCuenta);
-    alert('Cuenta eliminada exitosamente.');
+    alert('Cuenta eliminada exitosamente');
     limpiarInputs();
     buscarNumeroCuentaInput.focus();
 }

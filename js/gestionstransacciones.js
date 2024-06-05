@@ -33,6 +33,7 @@ function limpiarInputsTransaccion() {
 }
 
 function cargarTiposYCuentas() {
+    console.log('ejecutando')
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key.startsWith('tipo')) {
@@ -58,6 +59,37 @@ function cargarTiposYCuentas() {
     }
 }
 
+function actualizarSaldoCuenta(numeroCuenta, valor, tipoTransaccion) {
+    const cuentaStr = localStorage.getItem('numeroCuenta' + numeroCuenta);
+    const cuenta = JSON.parse(cuentaStr);
+
+    if (tipoTransaccion === 'Ingreso') {
+        cuenta.saldoCuenta = parseFloat(cuenta.saldoCuenta) + parseFloat(valor);
+    } else if (tipoTransaccion === 'Egreso') {
+        if (parseFloat(cuenta.saldoCuenta) < parseFloat(valor)) {
+            alert(`Saldo insuficiente. Su saldo actual es: ${cuenta.saldoCuenta}`);
+            return false;
+        }
+        cuenta.saldoCuenta = parseFloat(cuenta.saldoCuenta) - parseFloat(valor);
+    }
+
+    localStorage.setItem('numeroCuenta' + cuenta.numeroCuenta, JSON.stringify(cuenta));
+    return true;
+}
+
+function revertirSaldoCuenta(numeroCuenta, valor, tipoTransaccion) {
+    const cuentaStr = localStorage.getItem('numeroCuenta' + numeroCuenta);
+    const cuenta = JSON.parse(cuentaStr);
+
+    if (tipoTransaccion === 'Ingreso') {
+        cuenta.saldoCuenta = parseFloat(cuenta.saldoCuenta) - parseFloat(valor);
+    } else if (tipoTransaccion === 'Egreso') {
+        cuenta.saldoCuenta = parseFloat(cuenta.saldoCuenta) + parseFloat(valor);
+    }
+
+    localStorage.setItem('numeroCuenta' + cuenta.numeroCuenta, JSON.stringify(cuenta));
+}
+
 function guardarTransaccion() {
     const codigoTransaccion = codigoTransaccionInput.value;
     const transaccionExistente = Object.keys(localStorage).some(key => key.startsWith('transaccion') && JSON.parse(localStorage.getItem(key)).codigo === codigoTransaccion);
@@ -73,16 +105,17 @@ function guardarTransaccion() {
         tipoAsociado: tipoAsociadoInput.value,  // Guardar el ID del tipo asociado
         cuentaAsociada: cuentaAsociadaInput.value,
         valor: valorTransaccionInput.value,
-        fechaTransaccion : fechaTransaccionInput.value,
+        fechaTransaccion: fechaTransaccionInput.value,
         descripcion: descripcionTransaccionInput.value
     };
-    localStorage.setItem('transaccion' + transaccion.codigo, JSON.stringify(transaccion));
-    alert('Transacción guardada exitosamente.');
-    limpiarInputsTransaccion(); 
-    cargarTiposYCuentas(); 
+
+    if (actualizarSaldoCuenta(transaccion.cuentaAsociada, transaccion.valor, transaccion.tipoTransaccion)) {
+        localStorage.setItem('transaccion' + transaccion.codigo, JSON.stringify(transaccion));
+        alert('Transacción guardada exitosamente.');
+        limpiarInputsTransaccion();
+        cargarTiposYCuentas();
+    }
 }
-
-
 
 function consultarTransaccion() {
     const codigoTransaccion = buscarCodigoTransaccionInput.value;
@@ -103,27 +136,47 @@ function consultarTransaccion() {
 
 function actualizarTransaccion() {
     const codigoTransaccion = buscarCodigoTransaccionInput.value;
-    const transaccion = {
-        codigo: codigoTransaccion,
-        tipoTransaccion: editTipoTransaccionInput.value,
-        tipoAsociado: editTipoAsociadoInput.value,
-        cuentaAsociada: editCuentaAsociadaInput.value,
-        valor: editValorTransaccionInput.value,
-        fechaTransaccion : editFechaTransaccionInput.value,
-        descripcion: editDescripcionTransaccionInput.value
-    };
-    localStorage.setItem('transaccion' + codigoTransaccion, JSON.stringify(transaccion));
-    alert('Transacción actualizada exitosamente.');
-    limpiarInputsTransaccion();
-    cargarTiposYCuentas(); 
+    const transaccionAnteriorStr = localStorage.getItem('transaccion' + codigoTransaccion);
+    const transaccionAnterior = JSON.parse(transaccionAnteriorStr);
+
+    if (transaccionAnterior) {
+        revertirSaldoCuenta(transaccionAnterior.cuentaAsociada, transaccionAnterior.valor, transaccionAnterior.tipoTransaccion);
+
+        const transaccion = {
+            codigo: codigoTransaccion,
+            tipoTransaccion: editTipoTransaccionInput.value,
+            tipoAsociado: editTipoAsociadoInput.value,
+            cuentaAsociada: editCuentaAsociadaInput.value,
+            valor: editValorTransaccionInput.value,
+            fechaTransaccion: editFechaTransaccionInput.value,
+            descripcion: editDescripcionTransaccionInput.value
+        };
+
+        if (actualizarSaldoCuenta(transaccion.cuentaAsociada, transaccion.valor, transaccion.tipoTransaccion)) {
+            localStorage.setItem('transaccion' + codigoTransaccion, JSON.stringify(transaccion));
+            alert('Transacción actualizada exitosamente.');
+            limpiarInputsTransaccion();
+            cargarTiposYCuentas();
+        }
+    } else {
+        alert('No se encontró la transacción con el código proporcionado');
+    }
 }
 
 function eliminarTransaccion() {
     const codigoTransaccion = buscarCodigoTransaccionInput.value;
-    localStorage.removeItem('transaccion' + codigoTransaccion);
-    alert('Transacción eliminada exitosamente.');
-    limpiarInputsTransaccion(); 
-    cargarTiposYCuentas(); 
+    const transaccionStr = localStorage.getItem('transaccion' + codigoTransaccion);
+    const transaccion = JSON.parse(transaccionStr);
+
+    if (transaccion) {
+        revertirSaldoCuenta(transaccion.cuentaAsociada, transaccion.valor, transaccion.tipoTransaccion);
+        localStorage.removeItem('transaccion' + codigoTransaccion);
+        alert('Transacción eliminada exitosamente.');
+        limpiarInputsTransaccion();
+        cargarTiposYCuentas();
+    } else {
+        alert('No se encontró la transacción con el código proporcionado');
+    }
 }
 
 function mostrarAgregarTransaccion() {
@@ -136,6 +189,4 @@ function mostrarEditarTransaccion() {
     document.getElementById('edit-trade').style.display = 'block';
 }
 
-window.onload = function() {
-    cargarTiposYCuentas();
-};
+

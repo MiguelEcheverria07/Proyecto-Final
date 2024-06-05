@@ -5,15 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de alertas</title>
+    <link rel="stylesheet" href="../css/estiloshistorial.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
 </head>
 
 <body>
-    <div>
+    <div class="header-alerts">
         <div>
             <a href="javascript:void(0);" onclick="mostrarAgregarAlerta()">Agregar alertas</a>
             <a href="javascript:void(0);" onclick="mostrarEditarAlerta()">Consultar, actualizar o eliminar alertas</a>
         </div>
-        <div class="topic-container"></div>
+        <div class="topic-container">
+            <span>Fuentes y temas:</span>
+            <select id="seleccionarFuente" onchange="cambiarFuente(this.value)"></select>
+            </select>
+            <select name="" id="seleccionarTema" onchange="cambiarTema(this.value)">
+            </select>
+        </div>
     </div>
     <div id="add-alert" class="add-alert">
         <div>
@@ -83,6 +91,7 @@
     <audio id="alertaSonido" src="../recursos/audio/nicolas (mp3cut.net).mp3" preload="auto"></audio>
 
     <script src="../js/gestionalertas.js"></script>
+    <script src="../js/temas.js"></script>
 </body>
 
 </html>

@@ -1,12 +1,9 @@
-// Obtener todas las transacciones del localStorage
 const transacciones = Object.keys(localStorage)
     .filter(key => key.startsWith('transaccion'))
     .map(key => JSON.parse(localStorage.getItem(key)));
 
-// Obtener el contexto del canvas
 const ctx = document.getElementById('myBarChart').getContext('2d');
 
-// Obtener todas las categorías de los tipos del localStorage
 const categorias = Object.keys(localStorage)
     .filter(key => key.startsWith('tipo'))
     .map(key => {
@@ -32,11 +29,10 @@ const datasets = categorias.map((categoria, index) => ({
     borderWidth: 1
 }));
 
-// Crear la gráfica de barras
 const myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [], // Inicialmente, no hay etiquetas en el eje x
+        labels: [], 
         datasets: datasets
     },
     options: {
@@ -59,8 +55,15 @@ const myBarChart = new Chart(ctx, {
     }
 });
 
-// Función para actualizar los datos del gráfico según el mes seleccionado
-function actualizarGraficoPorMes(mesSeleccionado) {
+function obtenerMes(fecha) {
+    const date = new Date(fecha);
+    return date.getMonth();
+}
+
+function actualizarGraficoPorMes(mesSeleccionado, tipoTransaccion) {
+    console.log("Mes seleccionado:", mesSeleccionado);
+    console.log("Tipo de transacción:", tipoTransaccion);
+
     // Resetear los datos de los datasets
     myBarChart.data.datasets.forEach(dataset => {
         dataset.data = []; // Reiniciar los datos
@@ -69,28 +72,45 @@ function actualizarGraficoPorMes(mesSeleccionado) {
     // Agregar las etiquetas del mes seleccionado
     myBarChart.data.labels = [obtenerNombreMes(mesSeleccionado)];
 
-    // Filtrar las transacciones por el mes seleccionado y actualizar los datasets
+    // Filtrar las transacciones por el mes seleccionado y el tipo
     transacciones.forEach(transaccion => {
         const tipoStr = localStorage.getItem('tipo' + transaccion.tipoAsociado);
         const tipo = JSON.parse(tipoStr);
         const mes = obtenerMes(transaccion.fechaTransaccion);
-        if (mesSeleccionado === mes) {
+        
+        console.log('Mes de la transacción:', mes);
+        console.log('Tipo de la transacción:', transaccion.tipoTransaccion);
+        console.log('Tipo esperado:', tipoTransaccion);
+        
+        // Filtrar por mes y tipo de transacción
+        if (mesSeleccionado === mes && transaccion.tipoTransaccion.toLowerCase() === tipoTransaccion.toLowerCase()) {
+            console.log('Ejecutando condicion');
+            console.log("Transacción válida:", transaccion);
             const dataset = myBarChart.data.datasets.find(dataset => dataset.label === tipo.categoria);
-            dataset.data[0] = transaccion.valor;
+            if (dataset) {
+                if (!dataset.data[0]) {
+                    dataset.data[0] = 0;
+                }
+                dataset.data[0] += parseFloat(transaccion.valor);
+            }
         }
     });
 
-    // Actualizar la gráfica
     myBarChart.update();
+    if (tipoTransaccion === 'ingreso') {
+        document.getElementById('link-ingresos').classList.add('selected-ingreso');
+        document.getElementById('link-ingresos').classList.remove('selected-egreso');
+        document.getElementById('link-egresos').classList.remove('selected-egreso');
+    } else if (tipoTransaccion === 'egreso') {
+        document.getElementById('link-egresos').classList.add('selected-egreso');
+        document.getElementById('link-egresos').classList.remove('selected-ingreso');
+        document.getElementById('link-ingresos').classList.remove('selected-ingreso');
+    }
+    document.getElementById('selected-month').textContent = obtenerNombreMes(mesSeleccionado);
+
 }
 
-// Función para obtener el mes como número a partir de una fecha
-function obtenerMes(fecha) {
-    const date = new Date(fecha);
-    return date.getMonth();
-}
 
-// Función para obtener el nombre del mes a partir del número del mes
 function obtenerNombreMes(mes) {
     const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     return meses[mes];
@@ -100,10 +120,37 @@ function obtenerNombreMes(mes) {
 document.querySelector('.custom-select').addEventListener('click', function (e) {
     if (e.target.classList.contains('select-items') || e.target.parentElement.classList.contains('select-items')) {
         const mesSeleccionado = parseInt(e.target.getAttribute('data-value'));
-        actualizarGraficoPorMes(mesSeleccionado);
+        const tipoTransaccion = document.querySelector('.header-analysis .selected').dataset.tipo;
+        actualizarGraficoPorMes(mesSeleccionado, tipoTransaccion);
     }
 });
 
-// Inicializar la gráfica con el mes actual
+let menuVisible = false;
+
+document.querySelector('.custom-select').addEventListener('click', () => {
+    const selectItems = document.querySelector('.select-items');
+    menuVisible = !menuVisible;
+    selectItems.style.display = menuVisible ? 'block' : 'none';
+});
+
+document.querySelectorAll('.select-items div').forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelector('.select-items').style.display = 'none';
+    });
+});
+
+// Inicializar la gráfica con el mes actual y los ingresos
 const mesActual = new Date().getMonth();
-actualizarGraficoPorMes(mesActual);
+actualizarGraficoPorMes(mesActual, 'ingreso');
+
+document.getElementById('link-ingresos').addEventListener('click', () => {
+    document.querySelector('.header-analysis .selected').classList.remove('selected');
+    document.getElementById('link-ingresos').classList.add('selected');
+    actualizarGraficoPorMes(mesActual, 'ingreso');
+});
+
+document.getElementById('link-egresos').addEventListener('click', () => {
+    document.querySelector('.header-analysis .selected').classList.remove('selected');
+    document.getElementById('link-egresos').classList.add('selected');
+    actualizarGraficoPorMes(mesActual, 'egreso');
+});

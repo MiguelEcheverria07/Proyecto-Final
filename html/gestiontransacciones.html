@@ -5,17 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de transacciones a nivel de ingresos y egresos</title>
-    <link rel="stylesheet" href="../css/estiloshistorial.css">
+    <link rel="stylesheet" href="../css/estiloshistorial.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
 </head>
 
 <body>
-    <div>
+    <div class="header-transaction">
         <div>
             <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()">Agregar transaccion</a>
             <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()">Consultar, actualizar o eliminar transacciones</a>
         </div>
         <div class="topic-container">
-            
+            <span>Fuentes y temas:</span>
+            <select id="seleccionarFuente" onchange="cambiarFuente(this.value)"></select>
+            </select>
+            <select name="" id="seleccionarTema" onchange="cambiarTema(this.value)">
+            </select>
         </div>
     </div>
     <div id="add-trade" class="add-trade">
@@ -75,6 +80,7 @@
         </div>
     </div>
     <script src="../js/gestionstransacciones.js"></script>
+    <script src="../js/temas.js"></script>
 </body>
 
 </html>

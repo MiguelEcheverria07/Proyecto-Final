@@ -1,6 +1,9 @@
 body {
-    transition: all 0.3s ease;
     margin: 10px;
+}
+
+select:focus{
+    outline: none;
 }
 
 .accent {
@@ -9,6 +12,7 @@ body {
 
 *{
     margin: 10px;
+    transition: all 0.3s ease;
 }
 
 .header-container{
@@ -41,4 +45,17 @@ div > button{
 
 a{
     text-decoration: none;
+    color: black;
+    background-color: #ce8d00;
+}
+
+.header-transaction, .header-alerts{
+    display: flex;
+    width: 85vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-transaction>div>a, .header-alerts>div>a{
+    padding: 10px 15px;
 }

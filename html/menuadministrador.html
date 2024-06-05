@@ -4,40 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu administrador</title>
-    <style>
-        img{
-            width:100%;
-        }
-
-        body{
-            background-color: black;
-        }
-
-        a{
-            display: block;
-            padding: 20px;
-            text-decoration: none;
-            color:white;
-            background-color: rgb(49, 49, 49);
-        }
-
-        h1{
-            color: white;
-            margin-left: 10px;
-        }
-        .request{
-            margin: 40px 0 0 10px;
-            width: 400px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
 </head>
 <body>
-    <h1>Menu administrador</h1>
+    <div class="header-admin">
+        <h1>Menu administrador</h1>
+        <div id="topic-container">
+            <span>Fuentes y temas:</span>
+            <select id="seleccionarFuente" onchange="cambiarFuente(this.value)"></select>
+            </select>
+            <select name="" id="seleccionarTema" onchange="cambiarTema(this.value)">
+            </select>
+        </div>
+    </div>
     <div>
         <div class="request">
             <a href="gestiontipos.html">Gestión de tipos de ingresos y egresos</a>
             <img src="../recursos/imagenes/ingresos.png" alt="">
         </div>
     </div>
+    <script src="../js/temas.js"></script>
 </body>
 </html>

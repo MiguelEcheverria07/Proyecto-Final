@@ -7,25 +7,21 @@
     <title>Gestión de cuentas bancarias</title>
     <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
     <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
+    <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
 
-<body onload="desactivarHojaPorDefecto()">
+<body>
     <div class="menu">
         <div>
             <a href="javascript:void(0);" onclick="mostrarAgregarCuenta()">Agregar cuentas bancarias</a>
-            <a href="javascript:void(0);" onclick="mostrarEditarCuenta()">Consultar, actualizar o eliminar cuentas bancarias</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarCuenta()">Consultar, actualizar o eliminar cuentas
+                bancarias</a>
         </div>
         <div id="topic-container">
-            <span>Temas:</span>
-            <select name="" id="">
-                <option value="Segoe UI">Segoe UI</option>
-                <option value="Cursiva">Cursiva</option>
-                <option value="Cambria">Cambria</option>
+            <span>Fuentes y temas:</span>
+            <select id="seleccionarFuente" onchange="cambiarFuente(this.value)"></select>
             </select>
-            <select name="" id="seleccionarTema" onchange="cambiarHojaDeEstilos()">
-                <option value="temaClaro">Tema claro</option>
-                <option value="temaOscuro">Tema oscuro</option>
-                <option value="ema ???">Tema ???</option>
+            <select name="" id="seleccionarTema" onchange="cambiarTema(this.value)">
             </select>
         </div>
     </div>
@@ -97,4 +93,5 @@
 </body>
 <script src="../js/gestioncuentas.js"></script>
 <script src="../js/temas.js"></script>
+
 </html>

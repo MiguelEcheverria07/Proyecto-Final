@@ -5,24 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu General</title>
-    <link rel="stylesheet" href="../css/estilos.css">
-    <script src=""></script>
-    <style>
-        body{
-            background-color: rgb(0, 0, 0);
-        }
-
-        h1{
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/estilos.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
 </head>
 
-<body>
-    <div>
+<body class="body-general">
+    <div class="header-menu-general">
         <h1>Menu General</h1>
         <div id="topic-container">
-            
+            <span>Fuentes y temas:</span>
+            <select id="seleccionarFuente" onchange="cambiarFuente(this.value)"></select>
+            </select>
+            <select name="" id="seleccionarTema" onchange="cambiarTema(this.value)">
+            </select>
         </div>
     </div>
     <div class="container-general">
@@ -53,5 +48,5 @@
     </div>
 
 </body>
-
+<script src="../js/temas.js"></script>
 </html>
