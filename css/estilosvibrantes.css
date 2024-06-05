@@ -5,13 +5,18 @@ body {
     background-size: 100%;
     background-repeat: no-repeat;
     top: 0;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(20px);
     border-radius: 30px;
-    height: 82vh;
+    margin: 50px 65px 50px 65px;
+    height: 80vh;
 }
 
 *{
     transition: all 0.3s ease;
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 input::placeholder{
@@ -20,6 +25,7 @@ input::placeholder{
 
 a, span, button{
     position: relative;
+    color: black;
     font-weight: 600;
     display: inline-block;
     border-radius: 5px;
@@ -32,7 +38,7 @@ input, select, option, textarea{
 }
 
 input:hover, select:hover, option:hover, button:hover, a:hover, textarea:hover {
-    background-color: #b8b8b8;
+    background-color: #dae2f3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 

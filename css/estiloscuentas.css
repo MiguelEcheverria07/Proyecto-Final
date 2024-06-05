@@ -4,6 +4,49 @@ body {
     padding-top: 20px;
 }
 
+.add-account>div, .edit-account>div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.add-account >div:last-child, .edit-account>div:last-child{
+    display: block;
+    justify-content: flex-start;
+    margin-left: 60px;
+}
+
+.add-account>div:last-child>div, .add-account>div:last-child>div>textarea{
+    display: block;
+}
+
+.add-account>div>div{
+    display: flex;
+    align-items: center;
+}
+.add-account {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 55px;
+}
+
+.edit-account{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+    gap: 50px;
+}
+
+.edit-account>div, .add-account>div{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 a,
 span {
     text-decoration: none;
@@ -11,9 +54,6 @@ span {
     padding: 12px 20px;
 }
 
-div{
-    margin-left: 10px;
-}
 button{
     padding: 10px 25px;
 }
@@ -35,30 +75,6 @@ input, select, select:focus{
     align-items: center;
     width: auto;
     padding: 10px;
-}
-
-.add-account {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 300px;
-    gap: 70px;
-}
-
-.edit-account{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 300px;
-    gap: 50px;
-}
-
-.edit-account>div, .add-account>div{
-    display: flex;
-    align-items: center;
-    gap: 20px;
 }
 
 img{

@@ -27,68 +27,97 @@
     </div>
     <div id="add-account" class="add-account">
         <div>
-            <span>Numero de cuenta:</span>
-            <input type="text" id="numeroCuenta">
-            <span>Nombre del banco:</span>
-            <input type="text" id="nombreBanco">
-            <span>Tipo de cuenta:</span>
-            <select id="tipoCuenta">
-                <option value="Ahorros">Cuenta de ahorros</option>
-                <option value="Corriente">Cuenta Corriente</option>
-                <option value="Empresarial">Cuenta Empresarial</option>
-                <option value="Nomina">Cuenta de Nomina</option>
-                <option value="Inversion">Cuenta de Inversion</option>
-            </select>
+            <div>
+                <span>Numero de cuenta:</span>
+                <input type="text" id="numeroCuenta">
+            </div>
+            <div>
+                <span>Nombre del banco:</span>
+                <input type="text" id="nombreBanco">
+            </div>
+            <div>
+                <span>Tipo de cuenta:</span>
+                <select id="tipoCuenta">
+                    <option value="Ahorros">Cuenta de ahorros</option>
+                    <option value="Corriente">Cuenta Corriente</option>
+                    <option value="Empresarial">Cuenta Empresarial</option>
+                    <option value="Nomina">Cuenta de Nomina</option>
+                    <option value="Inversion">Cuenta de Inversion</option>
+                </select>
+            </div>
         </div>
         <div>
-            <span>Estado de la cuenta:</span>
-            <input type="text" id="estadoCuenta" readonly placeholder="Activa">
-            <span>Fecha de apertura:</span>
-            <input type="date" id="fechaCuenta">
-            <span>Saldo actual:</span>
-            <input type="number" id="saldoCuenta">
+            <div>
+                <span>Estado de la cuenta:</span>
+                <input type="text" id="estadoCuenta" readonly placeholder="Activa">
+            </div>
+            <div>
+                <span>Fecha de apertura:</span>
+                <input type="date" id="fechaCuenta">
+            </div>
+            <div>
+                <span>Saldo actual:</span>
+                <input type="number" id="saldoCuenta">
+            </div>
         </div>
         <div>
-            <span>Descripcion</span>
-            <textarea id="descripcionCuenta"></textarea>
-            <button onclick="guardarCuenta()">Guardar cuenta</button>
+            <div>
+                <span>Descripcion</span><br>
+                <textarea id="descripcionCuenta" style="width: 200px; height: 50px;"></textarea><br>
+                <button onclick="guardarCuenta()">Guardar cuenta</button>
+            </div>
         </div>
     </div>
     <div id="edit-account" class="edit-account" style="display: none;">
         <div>
-            <span>Ingrese el numero de cuenta:</span>
-            <input type="text" id="buscarNumeroCuenta">
-            <button onclick="consultarCuenta()">Consultar</button>
+            <div>
+
+                <span>Ingrese el numero de cuenta:</span>
+                <input type="text" id="buscarNumeroCuenta">
+                <button onclick="consultarCuenta()">Consultar</button>
+            </div>
         </div>
         <div>
-            <span>Nombre del banco:</span>
-            <input type="text" id="editNombreBanco">
-            <span>Tipo de cuenta:</span>
-            <select id="editTipoCuenta">
-                <option value="Ahorros">Cuenta de ahorros</option>
-                <option value="Corriente">Cuenta Corriente</option>
-                <option value="Empresarial">Cuenta Empresarial</option>
-                <option value="Nomina">Cuenta de Nomina</option>
-                <option value="Inversion">Cuenta de Inversion</option>
-            </select>
-            <span>Saldo actual:</span>
-            <input type="number" id="editSaldoCuenta">
+            <div>
+                <span>Nombre del banco:</span>
+                <input type="text" id="editNombreBanco">
+            </div>
+            <div>
+                <span>Tipo de cuenta:</span>
+                <select id="editTipoCuenta">
+                    <option value="Ahorros">Cuenta de ahorros</option>
+                    <option value="Corriente">Cuenta Corriente</option>
+                    <option value="Empresarial">Cuenta Empresarial</option>
+                    <option value="Nomina">Cuenta de Nomina</option>
+                    <option value="Inversion">Cuenta de Inversion</option>
+                </select>
+            </div>
+            <div>
+                <span>Saldo actual:</span>
+                <input type="number" id="editSaldoCuenta">
+            </div>
         </div>
         <div>
-            <span>Estado de la cuenta:</span>
-            <select id="editEstadoCuenta">
-                <option value="Activa">Activa</option>
-                <option value="Inactiva">Inactiva</option>
-                <option value="Cerrada">Cerrada</option>
-            </select>
-            <span>Fecha de apertura:</span>
-            <input type="date" id="editFechaCuenta">
+            <div>
+                <span>Estado de la cuenta:</span>
+                <select id="editEstadoCuenta">
+                    <option value="Activa">Activa</option>
+                    <option value="Inactiva">Inactiva</option>
+                    <option value="Cerrada">Cerrada</option>
+                </select>
+            </div>
+            <div>
+                <span>Fecha de apertura:</span>
+                <input type="date" id="editFechaCuenta">
+            </div>
         </div>
         <div>
-            <span>Descripcion</span>
-            <textarea id="editDescripcionCuenta"></textarea><br>
-            <button onclick="actualizarCuenta()">Actualizar cuenta</button>
-            <button onclick="eliminarCuenta()">Eliminar cuenta</button>
+            <div>
+                <span>Descripcion</span>
+                <textarea id="editDescripcionCuenta" style="width: 200px;"></textarea><br>
+                <button onclick="actualizarCuenta()">Actualizar cuenta</button>
+                <button onclick="eliminarCuenta()">Eliminar cuenta</button>
+            </div>
         </div>
 </body>
 <script src="../js/gestioncuentas.js"></script>
