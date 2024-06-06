@@ -13,6 +13,28 @@ const editHoraAlertaInput = document.getElementById('editHoraAlerta');
 const editDescripcionAlertaInput = document.getElementById('editDescripcionAlerta');
 
 const alertaSonido = document.getElementById('alertaSonido');
+const forms = document.querySelectorAll('form');
+
+forms.forEach(form => {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (form.checkValidity()) {
+            const submitButton = document.activeElement;
+            if (submitButton.name === 'action') {
+                if (submitButton.value === 'guardar') {
+                    guardarAlerta();
+                } else if (submitButton.value === 'editar') {
+                    actualizarAlerta();
+                } else if (submitButton.value === 'eliminar') {
+                    eliminarAlerta();
+                }
+            }
+        } else {
+            form.reportValidity();
+        }
+    });
+});
 
 function limpiarInputsAlerta() {
     codigoAlertaInput.value = '';
@@ -34,7 +56,6 @@ function mostrarNotificacion(mensaje) {
     alert(mensaje);
 }
 
-// Function to save alert
 function guardarAlerta() {
     const codigoAlerta = codigoAlertaInput.value;
     const alertaExistente = Object.keys(localStorage).some(key => key.startsWith('alerta') && JSON.parse(localStorage.getItem(key)).codigo === codigoAlerta);
@@ -53,7 +74,7 @@ function guardarAlerta() {
         descripcion: descripcionAlertaInput.value
     };
     localStorage.setItem('alerta' + alerta.codigo, JSON.stringify(alerta));
-    mostrarNotificacion('Alerta guardada exitosamente.');
+    mostrarNotificacion('Alerta guardada exitosamente');
     programarAlerta(alerta); 
     limpiarInputsAlerta(); 
 }
@@ -86,7 +107,7 @@ function actualizarAlerta() {
         descripcion: editDescripcionAlertaInput.value
     };
     localStorage.setItem('alerta' + codigoAlerta, JSON.stringify(alerta));
-    mostrarNotificacion('Alerta actualizada exitosamente.');
+    mostrarNotificacion('Alerta actualizada exitosamente');
     programarAlerta(alerta); 
     limpiarInputsAlerta(); 
 }
@@ -94,18 +115,18 @@ function actualizarAlerta() {
 function eliminarAlerta() {
     const codigoAlerta = buscarCodigoAlertaInput.value;
     localStorage.removeItem('alerta' + codigoAlerta);
-    mostrarNotificacion('Alerta eliminada exitosamente.');
+    mostrarNotificacion('Alerta eliminada exitosamente');
     limpiarInputsAlerta();
 }
 
 function mostrarAgregarAlerta() {
-    document.getElementById('add-alert').style.display = 'block';
+    document.getElementById('add-alert').style.display = 'flex';
     document.getElementById('edit-alert').style.display = 'none';
 }
 
 function mostrarEditarAlerta() {
     document.getElementById('add-alert').style.display = 'none';
-    document.getElementById('edit-alert').style.display = 'block';
+    document.getElementById('edit-alert').style.display = 'flex';
 }
 
 function solicitarPermisoNotificaciones() {

@@ -2,77 +2,90 @@ body {
     transition: all 0.3s;
     margin: 0;
     padding-top: 1vw;
-    overflow: hidden;
 }
 
-option{
+option {
     background-color: #ccc;
 }
 
- input{
+input {
     width: 160px;
 }
 
-.add-account>div{
+.add-account>div {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
 
-.add-account>div:nth-child(1), .add-account>div:nth-child(2){
+.add-account>div:nth-child(1),
+.add-account>div:nth-child(2) {
     width: 85%;
 }
 
-.add-account >div:last-child{
+.add-account>div:last-child {
     display: flex;
     margin-right: 68%;
 }
 
-@media(max-width:1160px){
-    .add-account>div:nth-child(1), .add-account>div:nth-child(2){
+.add-account>div:last-child>div>button{
+    margin-top: 10px;
+}
+
+@media(max-width:1160px) {
+
+    .add-account>div:nth-child(1),
+    .add-account>div:nth-child(2) {
         display: flex;
         width: 40%;
     }
 
-    .add-account{
+    .add-account {
         display: flex;
         justify-content: center;
         flex-direction: row;
     }
 
-    .add-account >div:last-child, .edit-account>div:last-child{
+    .add-account>div:last-child,
+    .edit-account>div:last-child {
         display: flex;
         margin: 0;
     }
 
-    .add-account>div:last-child>div, .add-account>div:last-child>div>textarea, .add-account>div>div> button{
+    .add-account>div:last-child>div,
+    .add-account>div:last-child>div>textarea,
+    .add-account>div>div>button {
         display: block;
         width: 110%;
     }
 
-    .menu>div:last-child{
+    .menu>div:last-child {
         display: block;
         flex-wrap: wrap;
     }
 
-    .menu>div:last-child>span{
+    .menu>div:last-child>span {
         display: block;
     }
-    
+
 }
 
-.add-account>div:last-child>div, .add-account>div:last-child>div>textarea{
+.add-account>div:last-child>div,
+.add-account>div:last-child>div>textarea {
     display: block;
     width: 90%;
     flex-wrap: wrap;
 }
 
-.add-account>div>div, .edit-account>div>div{
+.add-account>div>div,
+.edit-account>div>div {
     display: flex;
     align-items: center;
 }
-.add-account, .edit-account {
+
+.add-account,
+.edit-account, .filter-container {
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -81,7 +94,28 @@ option{
     gap: 3.5vw;
 }
 
-.edit-account{
+.filter-container{
+    height: 80px;
+    flex-wrap: nowrap;
+}
+
+.date-container{
+    margin-left: 13vw;
+}
+
+.tb-container{
+    display: flex;
+    justify-content: center;
+    margin: 3.5vw 0 2vw 0;
+}
+tr,td,th{
+    padding-right: 10px;
+}
+.date-container>div, .filter-container>div{
+    margin-bottom: 50px;
+}
+
+.edit-account {
     justify-content: flex-start;
     padding-left: 40px;
     flex-direction: column;
@@ -89,29 +123,32 @@ option{
 
 }
 
-.edit-account>div:last-child{
+.edit-account>div:last-child {
     display: inline;
 }
 
-.edit-account>div, .add-account>div{
+.edit-account>div,
+.add-account>div {
     display: flex;
     gap: 20px;
-    
+
 }
-.edit-account>div:last-child>div{
+
+.edit-account>div:last-child>div {
     display: block;
     margin-bottom: 15px;
 
 }
-.edit-account>div:last-child>div>textarea{
+
+.edit-account>div:last-child>div>textarea {
     display: block;
 }
 
-.selected-link{
-    background-color: rgb(179, 179, 179);
+.selected-link {
+    background-color:#cacaca;
 }
 
-.selected-link:hover{
+.selected-link:hover {
     background-color: #bbbbbb;
 }
 
@@ -122,23 +159,25 @@ span {
     padding: 12px 20px;
 }
 
-button{
+button {
     padding: 10px 25px;
     cursor: pointer;
 }
 
-input, select, select:focus{
-    padding:5px;
+input,
+select,
+select:focus {
+    padding: 5px;
     outline: none;
 }
 
 .menu>div>a {
-    padding:12px 20px;
+    padding: 12px 20px;
     margin: 5px 20px 5px 0;
     border-radius: 10px;
 }
 
-.menu>div:first-child{
+.menu>div:first-child {
     display: flex;
     flex-wrap: wrap;
 }
@@ -151,19 +190,20 @@ input, select, select:focus{
     padding: 15px;
 }
 
-img{
-    width:100%;
+/* Estilos menu admin */
+img {
+    width: 100%;
     border-radius: 0 0 20px 20px;
 }
 
-.request{
-    margin: 40px 0 0 10px;
+.request {
+    margin: 40px 0 0 50px;
     width: 400px;
     overflow: hidden;
     border-radius: 20px;
 }
 
-.request > a{
+.request>a {
     display: block;
     overflow: hidden;
     padding: 20px;
@@ -172,34 +212,111 @@ img{
     background-color: rgb(212, 211, 212);
 }
 
-.header-admin{
+.header-admin {
     display: flex;
-    width: 70vw;
     align-items: center;
     justify-content: space-between;
+    padding: 0 40px;
 }
 
-.menu-types{
-    width: 90vw;
+.menu-types {
     display: flex;
+    justify-content: space-between;
+    padding: 10px 40px;
 }
 
-.add-type, .edit-type {
+.menu-types>div>a {
+    margin-right: 10px;
+}
+
+.add-type>div,
+.edit-type>div {
+    margin-bottom: 2vw;
+}
+
+.add-type,
+.edit-type {
     margin-top: 10px;
+    display: block;
+    padding-left: 50px;
+}
+
+.add-type>div>button, .edit-type>div>button {
+    margin-top: 15px;
+}
+
+.add-type>div>input,
+.edit-type>div>input {
+    margin-right: 50px;
+}
+
+.edit-type>div:nth-of-type(2)>select {
+    margin-right: 50px;
+}
+
+/* Estilos transacciones y alertas */
+.header-trade,
+.header-alerts {
+    display: flex;
+    padding: 10px 50px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-trade>div>a,
+.header-alerts>div>a {
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.add-trade,
+.edit-trade,
+.add-alert,
+.edit-alert {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 300px;
-    gap: 50px;
+    align-items: center;
+    margin-top: 1vw;
+    gap: 4vw;
+}
+
+.edit-trade,
+.add-alert,
+.edit-alert {
+    align-items: flex-start;
+    padding-left: 50px;
+    gap: 3vw;
+}
+
+.add-trade>div,
+.edit-trade>div,
+.add-alert>div,
+.edit-alert>div {
+    display: flex;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
-.add-type>div>input, .edit-type >div>input{
-    margin-right: 50px;
+.add-trade>div:last-child {
+    align-self: flex-start;
+    margin-left: 5%;
 }
 
-.edit-type>div:nth-of-type(2)>select{
-    margin-right: 50px;
+.add-trade>div>div>textarea,
+.add-trade>div:last-child>div,
+.edit-trade>div>div>textarea,
+.add-alert>div>div>textarea,
+.edit-alert>div>div>textarea,
+.edit-trade>div:last-child,
+.add-alert>div:last-child,
+.edit-alert>div:last-child {
+    display: block;
 }
 
 
+.edit-trade>div:last-child>div:last-child,
+.add-alert>div:last-child>div:last-child,
+.edit-alert>div:last-child>div:last-child {
+    margin-top: 15px;
+}

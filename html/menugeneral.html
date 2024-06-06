@@ -23,29 +23,39 @@
     </div>
     <div class="container-general">
         <div class="menu-container">
-            <div class="request">
-                <a href="gestioncuentasbancarias.html">Gestion de cuentas bancarias</a>
+            <div class="request" data-url="gestioncuentasbancarias.html">
+                <a>Gestion de cuentas bancarias</a>
                 <img src="../recursos/imagenes/cuentabancaria.jpg" alt="">
             </div>
-            <div class="request">
-                <a href="gestiontransacciones.html">Gestión de transacciones</a>
+            <div class="request" data-url="gestiontransacciones.html">
+                <a>Gestión de transacciones</a>
                 <img src="../recursos/imagenes/transacciones.webp" alt="">
             </div>
-            <div class="request">
-                <a href="gestionalertas.html">Gestión de alertas</a>
+            <div class="request" data-url="gestionalertas.html">
+                <a>Gestión de alertas</a>
                 <img src="../recursos/imagenes/alertas.webp" alt="">
             </div>
-            <div class="request">
-                <a href="analisisgastos.html">Analisis de gastos</a>
+            <div class="request" data-url="analisisgastos.html">
+                <a>Analisis de gastos</a>
                 <img src="../recursos/imagenes/analisis.avif" alt="">
             </div>
-            <div class="request">
-                <a href="historialtransacciones.html">Historial de transacciones</a>
+            <div class="request" data-url="historialtransacciones.html">
+                <a>Historial de transacciones</a>
                 <img src="../recursos/imagenes/historial.jpg" alt="">
             </div>
         </div>
     </div>
-
+    <script src="../js/temas.js"></script>
 </body>
-<script src="../js/temas.js"></script>
+
+<script>
+    const contenedores = document.querySelectorAll('.request');
+    contenedores.forEach(element => {
+        element.addEventListener('click', () => {
+            const url = element.getAttribute('data-url');
+            window.location.href = url;
+        });
+    });
+</script>
+
 </html>

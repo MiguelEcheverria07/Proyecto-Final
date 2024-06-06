@@ -69,3 +69,50 @@ button, a{
     cursor: pointer;
     border: none;
 }
+
+.selected-link, .selected{
+    background-color: #f1f1f1;
+}
+
+.selected-link:hover, .selected:hover{
+    background-color: #ebebeb;
+}
+
+.select-selected {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #000;
+    animation: glow 3s infinite alternate;
+    backdrop-filter: blur(10px);
+}
+
+.select-selected:hover {
+    background-color: #f1f1f1;
+}
+
+.select-items {
+    background-color: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.select-items::-webkit-scrollbar-track {
+    background: #d6d6d6;
+}
+
+.select-items::-webkit-scrollbar-thumb {
+    background: #6406bb;
+}
+
+.select-items::-webkit-scrollbar-thumb:hover {
+    background: #8b3dd4;
+}
+
+.select-items div,
+.select-selected {
+    color: #000;
+}
+
+.select-items div:hover,
+.select-items div.selected {
+    background-color: #f1f1f1;
+    animation: glow 3s infinite alternate;
+}

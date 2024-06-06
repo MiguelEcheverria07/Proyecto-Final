@@ -15,7 +15,9 @@ a, input, button, select, textarea {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
-
+table{
+    color: #fff;
+}
 .request > a{
     background-color: #201e1e;
     color:white;
@@ -40,4 +42,49 @@ option:hover {
     background-color: #ccc; 
 }
 
+.header-analysis>div>a{
+    color: #fff;
+}
 
+.selected, .selected-link{
+    background-color: #535251;
+}
+
+.select-selected {
+    background-color: #1a1a1a;
+    color: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.select-selected:hover {
+    background-color: #333;
+}
+
+.select-items {
+    background-color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.select-items::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 5px;
+}
+
+.select-items::-webkit-scrollbar-thumb {
+    background: #6200ea;
+}
+
+.select-items::-webkit-scrollbar-thumb:hover {
+    background: #bb86fc;
+}
+
+.select-items div,
+.select-selected {
+    color: #fff;
+}
+
+.select-items div:hover,
+.select-items div.selected {
+    background-color: #6200ea;
+    box-shadow: 0 0 20px rgba(98, 0, 234, 1);
+}

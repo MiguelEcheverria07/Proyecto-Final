@@ -7,13 +7,16 @@
     <title>Gestión de tipos de ingresos y egresos</title>
     <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
     <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
+    <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
 
 <body>
     <div class="menu-types">
         <div>
-            <a href="javascript:void(0);" onclick="mostrarAgregarTipo()">Agregar tipos de ingreso o egreso</a>
-            <a href="javascript:void(0);" onclick="mostrarEditarTipo()">Consultar, actualizar o eliminar tipos de
+            <a href="javascript:void(0);" onclick="mostrarAgregarTipo()" id="link-guardar" class="selected-link">Agregar
+                tipos de ingreso o egreso</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarTipo()" id="link-editar">Consultar, actualizar o
+                eliminar tipos de
                 ingresos o egresos</a>
         </div>
         <div class="topic-container">
@@ -24,54 +27,58 @@
             </select>
         </div>
     </div>
-    <div class="add-type" id="add-type">
-        <div>
-            <span>Codigo:</span>
-            <input type="text" id="codigoTipo">
-            <span>Nombre del tipo</span>
-            <input type="text" id="nombreTipo">
-            <span>Tipo:</span>
-            <select name="" id="tipo">
-                <option value="Ingreso">Ingreso</option>
-                <option value="Egreso">Egreso</option>
-            </select>
+    <form action="#">
+        <div class="add-type" id="add-type">
+            <div>
+                <span>Codigo:</span>
+                <input type="text" id="codigoTipo" required>
+                <span>Nombre del tipo</span>
+                <input type="text" id="nombreTipo" required>
+                <span>Tipo:</span>
+                <select name="" id="tipo">
+                    <option value="Ingreso">Ingreso</option>
+                    <option value="Egreso">Egreso</option>
+                </select>
+            </div><br>
+            <div>
+                <span>Categoria:</span>
+                <input type="text" id="categoria">
+            </div>
+            <div style="display: block;">
+                <span>Descripcion</span><br>
+                <textarea id="descripcionTipo" style="width: 200px; height: 40px;"></textarea><br>
+                <button type="submit" name="action" value="guardar">Guardar tipo</button>
+            </div>
         </div>
-        <div>
-            <span>Categoria:</span>
-            <input type="text" id="categoria">
+    </form>
+    <form action="#">
+        <div class="edit-type" id="edit-type" style="display: none;">
+            <div>
+                <span>Ingrese el codigo:</span>
+                <input type="text" id="buscarCodigoTipo" required>
+                <button type="submit" onclick="consultarTipo()">Consultar</button>
+            </div>
+            <div>
+                <span>Nombre del tipo:</span>
+                <input type="text" id="editNombreTipo" required>
+                <span>Tipo:</span>
+                <select name="" id="editTipo">
+                    <option value="Ingreso">Ingreso</option>
+                    <option value="Egreso">Egreso</option>
+                </select>
+                <span>Categoria:</span>
+                <input type="text" id="editCategoria">
+            </div>
+            <div>
+                <span>Descripcion</span><br>
+                <textarea id="editDescripcionTipo" style="width: 200px; height: 40px;"></textarea><br>
+                <button type="submit" name="action" value="editar">Actualizar tipo</button>
+                <button type="submit" name="action" value="eliminar">Eliminar tipo</button>
+            </div>
         </div>
-        <div>
-            <span>Descripcion</span><br>
-            <textarea id="descripcionTipo"></textarea><br>
-            <button onclick="guardarTipo()">Guardar tipo</button>
-        </div>
-    </div>
-    <div class="edit-type" id="edit-type" style="display: none;">
-        <div>
-            <span>Ingrese el codigo</span>
-            <input type="text" id="buscarCodigoTipo">
-            <button onclick="consultarTipo()">Consultar</button>
-        </div>
-        <div>
-            <span>Nombre del tipo:</span>
-            <input type="text" id="editNombreTipo">
-            <span>Tipo:</span>
-            <select name="" id="editTipo">
-                <option value="Ingreso">Ingreso</option>
-                <option value="Egreso">Egreso</option>
-            </select>
-            <span>Categoria:</span>
-            <input type="text" id="editCategoria">
-        </div>
-        <div>
-            <span>Descripcion</span><br>
-            <textarea id="editDescripcionTipo"></textarea><br>
-            <button onclick="actualizarTipo()">Actualizar tipo</button>
-            <button onclick="eliminarTipo()">Eliminar tipo</button>
-        </div>
-    </div>
+    </form>
+    <script src="../js/gestiontipos.js"></script>
+    <script src="../js/temas.js"></script>
 </body>
-<script src="../js/gestiontipos.js"></script>
-<script src="../js/temas.js"></script>
 
 </html>

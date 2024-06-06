@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análisis de gastos</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/estilos.css" id="hojaNormal">
     <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
-    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
 
-<body style="background-color: black;">
+<body>
     <div class="header-analysis">
         <div>
             <a href="#" id="link-ingresos" class="selected selected-ingreso" data-tipo="ingreso">Ingresos mensuales por
@@ -39,16 +40,16 @@
             <div data-value="7">Agosto</div>
             <div data-value="8">Septiembre</div>
             <div data-value="9">Octubre</div>
-            <div data-value="10">Noviembre</div>
             <div data-value="11">Diciembre</div>
+            <div data-value="10">Noviembre</div>
         </div>
     </div>
-    <div>
+    <div class="graph">
         <canvas id="myBarChart" width="400" height="300"></canvas>
     </div>
-
+    <script src="../js/analisis.js"></script>
+    <script src="../js/temas.js"></script>
 </body>
-<script src="../js/analisis.js"></script>
-<script src="../js/temas.js"></script>
+
 
 </html>

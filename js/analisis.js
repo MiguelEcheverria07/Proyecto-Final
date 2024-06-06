@@ -12,18 +12,16 @@ const categorias = Object.keys(localStorage)
         return tipo.categoria;
     });
 
-// Generar un color aleatorio para cada categoría
 const colores = categorias.map(() => {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
+    const r = Math.floor(Math.random() * 220);
+    const g = Math.floor(Math.random() * 220);
+    const b = Math.floor(Math.random() * 220);
     return `rgba(${r}, ${g}, ${b}, 0.5)`;
 });
 
-// Crear un dataset para cada categoría
 const datasets = categorias.map((categoria, index) => ({
     label: categoria,
-    data: [], // Inicialmente, no hay datos
+    data: [],
     backgroundColor: colores[index],
     borderColor: colores[index].replace('0.5', '1'),
     borderWidth: 1
@@ -32,7 +30,7 @@ const datasets = categorias.map((categoria, index) => ({
 const myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [], 
+        labels: [],
         datasets: datasets
     },
     options: {
@@ -41,14 +39,14 @@ const myBarChart = new Chart(ctx, {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: ''
+                    text: '',
                 }
             },
             y: {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Valor'
+                    text: 'Valor',
                 }
             }
         }
@@ -61,31 +59,18 @@ function obtenerMes(fecha) {
 }
 
 function actualizarGraficoPorMes(mesSeleccionado, tipoTransaccion) {
-    console.log("Mes seleccionado:", mesSeleccionado);
-    console.log("Tipo de transacción:", tipoTransaccion);
-
-    // Resetear los datos de los datasets
     myBarChart.data.datasets.forEach(dataset => {
-        dataset.data = []; // Reiniciar los datos
+        dataset.data = [];
     });
 
-    // Agregar las etiquetas del mes seleccionado
     myBarChart.data.labels = [obtenerNombreMes(mesSeleccionado)];
 
-    // Filtrar las transacciones por el mes seleccionado y el tipo
     transacciones.forEach(transaccion => {
         const tipoStr = localStorage.getItem('tipo' + transaccion.tipoAsociado);
         const tipo = JSON.parse(tipoStr);
         const mes = obtenerMes(transaccion.fechaTransaccion);
-        
-        console.log('Mes de la transacción:', mes);
-        console.log('Tipo de la transacción:', transaccion.tipoTransaccion);
-        console.log('Tipo esperado:', tipoTransaccion);
-        
-        // Filtrar por mes y tipo de transacción
+
         if (mesSeleccionado === mes && transaccion.tipoTransaccion.toLowerCase() === tipoTransaccion.toLowerCase()) {
-            console.log('Ejecutando condicion');
-            console.log("Transacción válida:", transaccion);
             const dataset = myBarChart.data.datasets.find(dataset => dataset.label === tipo.categoria);
             if (dataset) {
                 if (!dataset.data[0]) {
@@ -110,13 +95,11 @@ function actualizarGraficoPorMes(mesSeleccionado, tipoTransaccion) {
 
 }
 
-
 function obtenerNombreMes(mes) {
     const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     return meses[mes];
 }
 
-// Evento para la selección de mes
 document.querySelector('.custom-select').addEventListener('click', function (e) {
     if (e.target.classList.contains('select-items') || e.target.parentElement.classList.contains('select-items')) {
         const mesSeleccionado = parseInt(e.target.getAttribute('data-value'));
@@ -139,7 +122,6 @@ document.querySelectorAll('.select-items div').forEach(item => {
     });
 });
 
-// Inicializar la gráfica con el mes actual y los ingresos
 const mesActual = new Date().getMonth();
 actualizarGraficoPorMes(mesActual, 'ingreso');
 

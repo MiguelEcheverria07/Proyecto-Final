@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de transacciones</title>
-    <link rel="stylesheet" href="../css/estiloshistorial.css">
+    <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
+    <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
 
 <body>
-    <div>
+    <div class="filter-container">
         <div>
-            <span>Filtros de búsqueda |</span>
+            <span>Filtros de búsqueda </span>
             <span>Categoria:</span>
             <select name="" id="categoriaSelect">
                 <option value="Todas">Todas</option>
-                <!-- Aquí se deben cargar las categorías creadas -->
             </select>
             <span>Tipo:</span>
             <select name="" id="tipoSelect">
@@ -32,13 +33,13 @@
             </select>
         </div>
     </div>
-    <div>
+    <div class="date-container">
         <span>Desde:</span>
         <input type="date" name="" id="desdeInput">
         <span>Hasta</span>
         <input type="date" name="" id="hastaInput">
     </div>
-    <div>
+    <div class="tb-container">
         <table id="transaccionesTable">
             <tr>
                 <th>Tipo de transacción</th>
@@ -46,7 +47,6 @@
                 <th>Monto de la transacción</th>
                 <th>Fecha de la transacción</th>
             </tr>
-            <!-- Las transacciones se agregarán aquí -->
         </table>
     </div>
 </body>

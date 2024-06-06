@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de transacciones a nivel de ingresos y egresos</title>
-    <link rel="stylesheet" href="../css/estiloshistorial.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
     <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
     <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
 
 <body>
-    <div class="header-transaction">
+    <div class="header-trade">
         <div>
-            <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()" id="link-guardar">Agregar transaccion</a>
-            <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()" id="link-editar">Consultar, actualizar o eliminar transacciones</a>
+            <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()" id="link-guardar" class="selected-link">Agregar
+                transaccion</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()" id="link-editar">Consultar, actualizar o
+                eliminar transacciones</a>
         </div>
         <div class="topic-container">
             <span>Fuentes y temas:</span>
@@ -24,64 +26,98 @@
             </select>
         </div>
     </div>
-    <div id="add-trade" class="add-trade">
-        <div>
-            <span>Codigo de transaccion:</span>
-            <input type="text" id="codigoTransaccion">
-            <span>Tipo de transaccion:</span>
-            <select id="tipoTransaccion">
-                <option value="Ingreso">Ingreso</option>
-                <option value="Egreso">Egreso</option>
-            </select>
-            <span>Tipo de ingreso o egreso asociado:</span>
-            <select id="tipoAsociado"></select>
-        </div>
-        <div>
-            <span>Cuenta bancaria relacionada:</span>
-            <select id="cuentaAsociada"></select>
-            <span>Valor de la transaccion:</span>
-            <input type="number" id="valorTransaccion">
+    <form action="#" id="form-add-trade">
+        <div id="add-trade" class="add-trade">
             <div>
-                <span>Fecha de la transaccion:</span>
-                <input type="date" name="" id="fechaTransaccion">
+                <div>
+                    <span>Codigo de transaccion:</span>
+                    <input type="text" id="codigoTransaccion" required>
+                </div>
+                <div>
+                    <span>Tipo de transaccion:</span>
+                    <select id="tipoTransaccion">
+                        <option value="Ingreso">Ingreso</option>
+                        <option value="Egreso">Egreso</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Tipo de ingreso o egreso asociado:</span>
+                    <select id="tipoAsociado"></select>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Cuenta bancaria relacionada:</span>
+                    <select id="cuentaAsociada"></select>
+                </div>
+                <div>
+                    <span>Valor de la transaccion:</span>
+                    <input type="number" id="valorTransaccion" required>
+                </div>
+                <div>
+                    <span>Fecha de la transaccion:</span>
+                    <input type="date" name="" id="fechaTransaccion" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Descripcion</span> <br>
+                    <textarea id="descripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> <br>
+                    <button type="submit" name="action" value="guardar">Guardar transaccion</button>
+                </div>
             </div>
         </div>
-        <div>
-            <span>Descripcion</span> <br>
-            <textarea id="descripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> <br>
-            <button onclick="guardarTransaccion()">Guardar transaccion</button>
+    </form>
+    <form action="#">
+        <div id="edit-trade" class="edit-trade" style="display: none;">
+            <div>
+                <div>
+                    <span>Ingrese el codigo:</span>
+                    <input type="text" id="buscarCodigoTransaccion" required>    
+                </div>
+                <div>
+                    <button type="submit" onclick="consultarTransaccion()">Consultar</button>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Tipo de transaccion:</span>
+                    <select id="editTipoTransaccion">
+                        <option value="Ingreso">Ingreso</option>
+                        <option value="Egreso">Egreso</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Tipo de ingreso o egreso asociado:</span>
+                    <select id="editTipoAsociado"></select>
+                </div>
+                <div>
+                    <span>Fecha de la transaccion:</span>
+                    <input type="date" id="editFechaTransaccion" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Cuenta bancaria relacionada:</span>
+                    <select id="editCuentaAsociada"></select>
+                </div>
+                <div>
+                    <span>Valor de la transaccion:</span>
+                    <input type="number" id="editValorTransaccion" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Descripcion</span> 
+                    <textarea id="editDescripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> 
+                </div>
+                <div>
+                    <button type="submit" name="action" value="editar">Actualizar transaccion</button>
+                    <button type="submit" name="action" value="eliminar">Eliminar transaccion</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="edit-trade" class="edit-trade" style="display: none;">
-        <div>
-            <span>Ingrese el codigo:</span>
-            <input type="text" id="buscarCodigoTransaccion">
-            <button onclick="consultarTransaccion()">Consultar</button>
-        </div>
-        <div>
-            <span>Tipo de transaccion:</span>
-            <select id="editTipoTransaccion">
-                <option value="Ingreso">Ingreso</option>
-                <option value="Egreso">Egreso</option>
-            </select>
-            <span>Tipo de ingreso o egreso asociado:</span>
-            <select id="editTipoAsociado"></select>
-            <span>Fecha de la transaccion:</span>
-            <input type="date" name="" id="editFechaTransaccion">
-        </div>
-        <div>
-            <span>Cuenta bancaria relacionada:</span>
-            <select id="editCuentaAsociada"></select>
-            <span>Valor de la transaccion:</span>
-            <input type="number" id="editValorTransaccion">
-        </div>
-        <div>
-            <span>Descripcion</span> <br>
-            <textarea id="editDescripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> <br>
-            <button onclick="actualizarTransaccion()">Actualizar transaccion</button>
-            <button onclick="eliminarTransaccion()">Eliminar transaccion</button>
-        </div>
-    </div>
+    </form>
     <script src="../js/gestionstransacciones.js"></script>
     <script src="../js/temas.js"></script>
 </body>

@@ -25,13 +25,14 @@ forms.forEach(form => {
                 if (submitButton.value === 'guardar') {
                     guardarCuenta();
                 } else if (submitButton.value === 'editar') {
-                    editarCuenta();
+                    actualizarCuenta();
                 } else if (submitButton.value === 'eliminar') {
                     eliminarCuenta();
                 }
             }
         } else {
             form.reportValidity();
+
         }
     });
 });

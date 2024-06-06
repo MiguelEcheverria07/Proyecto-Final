@@ -14,6 +14,29 @@ const editValorTransaccionInput = document.getElementById('editValorTransaccion'
 const editFechaTransaccionInput = document.getElementById('editFechaTransaccion');
 const editDescripcionTransaccionInput = document.getElementById('editDescripcionTransaccion');
 
+const forms = document.querySelectorAll('form');
+
+forms.forEach(form => {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (form.checkValidity()) {
+            const submitButton = document.activeElement;
+            if (submitButton.name === 'action') {
+                if (submitButton.value === 'guardar') {
+                    guardarTransaccion();
+                } else if (submitButton.value === 'editar') {
+                    actualizarTransaccion();
+                } else if (submitButton.value === 'eliminar') {
+                    eliminarTransaccion();
+                }
+            }
+        } else {
+            form.reportValidity();
+        }
+    });
+});
+
 function limpiarInputsTransaccion() {
     codigoTransaccionInput.value = '';
     tipoTransaccionInput.value = 'Ingreso';
@@ -33,7 +56,6 @@ function limpiarInputsTransaccion() {
 }
 
 function cargarTiposYCuentas() {
-    console.log('ejecutando')
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key.startsWith('tipo')) {
@@ -95,7 +117,7 @@ function guardarTransaccion() {
     const transaccionExistente = Object.keys(localStorage).some(key => key.startsWith('transaccion') && JSON.parse(localStorage.getItem(key)).codigo === codigoTransaccion);
 
     if (transaccionExistente) {
-        alert('Ya existe una transacción con el mismo código.');
+        alert('Ya existe una transacción con el mismo código');
         return;
     }
 
@@ -180,13 +202,13 @@ function eliminarTransaccion() {
 }
 
 function mostrarAgregarTransaccion() {
-    document.getElementById('add-trade').style.display = 'block';
+    document.getElementById('add-trade').style.display = 'flex';
     document.getElementById('edit-trade').style.display = 'none';
 }
 
 function mostrarEditarTransaccion() {
     document.getElementById('add-trade').style.display = 'none';
-    document.getElementById('edit-trade').style.display = 'block';
+    document.getElementById('edit-trade').style.display = 'flex';
 }
 
 

@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de alertas</title>
-    <link rel="stylesheet" href="../css/estiloshistorial.css" id="hojaNormal">
+    <link rel="stylesheet" href="../css/estiloscuentas.css" id="hojaNormal">
     <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
+    <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
 
 <body>
@@ -23,70 +24,104 @@
             </select>
         </div>
     </div>
-    <div id="add-alert" class="add-alert">
-        <div>
-            <span>Codigo de alerta:</span>
-            <input type="text" id="codigoAlerta">
-            <span>Tipo de alerta:</span>
-            <select id="tipoAlerta">
-                <option value="Factura">Factura</option>
-                <option value="Impuesto">Impuesto</option>
-                <option value="Saldo Minimo">Saldo Minimo</option>
-            </select>
-            <span>Opciones de repeticion</span>
-            <select id="opcionRepeticion">
-                <option value="Una vez">Una vez</option>
-                <option value="Diariamente">Diariamente</option>
-                <option value="Semanal">Semanal</option>
-                <option value="Mensual">Mensual</option>
-            </select>
+    <form action="#">
+        <div id="add-alert" class="add-alert">
+            <div>
+                <div>
+                    <span>Codigo de alerta:</span>
+                    <input type="text" id="codigoAlerta" required>
+                </div>
+                <div>
+                    <span>Tipo de alerta:</span>
+                    <select id="tipoAlerta">
+                        <option value="Factura">Factura</option>
+                        <option value="Impuesto">Impuesto</option>
+                        <option value="Saldo Minimo">Saldo Minimo</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Opciones de repeticion</span>
+                    <select id="opcionRepeticion">
+                        <option value="Una vez">Una vez</option>
+                        <option value="Diariamente">Diariamente</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Mensual">Mensual</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Fecha de la alerta:</span>
+                    <input type="date" id="fechaAlerta" required>
+                </div>
+                <div>
+                    <span>Hora de la alerta:</span>
+                    <input type="time" id="horaAlerta" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Descripcion:</span>
+                    <textarea id="descripcionAlerta" style="width: 25vw; height: 50px;" required></textarea>
+                </div>
+                <div>
+                    <button type="submit" name="action" value="guardar">Guardar alerta</button>
+                </div>
+            </div>
         </div>
-        <div>
-            <span>Fecha de la alerta:</span>
-            <input type="date" id="fechaAlerta">
-            <span>Hora de la alerta:</span>
-            <input type="time" id="horaAlerta">
+    </form>
+    <form action="#">
+        <div id="edit-alert" class="edit-alert" style="display: none;">
+            <div>
+                <div>
+                    <span>Codigo de alerta:</span>
+                    <input type="text" id="buscarCodigoAlerta" required>
+                </div>
+                <div>
+                    <button type="submit" onclick="consultarAlerta()">Consultar</button>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Tipo de alerta:</span>
+                    <select id="editTipoAlerta">
+                        <option value="Factura">Factura</option>
+                        <option value="Impuesto">Impuesto</option>
+                        <option value="Saldo Minimo">Saldo Minimo</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Opciones de repeticion</span>
+                    <select id="editOpcionRepeticion">
+                        <option value="Una vez">Una vez</option>
+                        <option value="Diariamente">Diariamente</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Mensual">Mensual</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Fecha de la alerta:</span>
+                    <input type="date" id="editFechaAlerta" required>
+                </div>
+                <div>
+                    <span>Hora de la alerta:</span>
+                    <input type="time" id="editHoraAlerta" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span>Descripcion:</span>
+                    <textarea id="editDescripcionAlerta" style="width: 25vw; height: 50px;" required></textarea>
+                </div>
+                <div>
+                    <button type="submit" name="action" value="editar">Actualizar alerta</button>
+                    <button type="submit" name="action" value="eliminar">Eliminar alerta</button>
+                </div>
+            </div>
         </div>
-        <div>
-            <span>Descripcion:</span>
-            <textarea id="descripcionAlerta"></textarea> <br>
-            <button onclick="guardarAlerta()">Guardar alerta</button>
-        </div>
-    </div>
-    <div id="edit-alert" class="edit-alert" style="display: none;">
-        <div>
-            <span>Codigo de alerta:</span>
-            <input type="text" id="buscarCodigoAlerta">
-            <button onclick="consultarAlerta()">Consultar</button>
-        </div>
-        <div>
-            <span>Tipo de alerta:</span>
-            <select id="editTipoAlerta">
-                <option value="Factura">Factura</option>
-                <option value="Impuesto">Impuesto</option>
-                <option value="Saldo Minimo">Saldo Minimo</option>
-            </select>
-            <span>Opciones de repeticion</span>
-            <select id="editOpcionRepeticion">
-                <option value="Una vez">Una vez</option>
-                <option value="Diariamente">Diariamente</option>
-                <option value="Semanal">Semanal</option>
-                <option value="Mensual">Mensual</option>
-            </select>
-        </div>
-        <div>
-            <span>Fecha de la alerta:</span>
-            <input type="date" id="editFechaAlerta">
-            <span>Hora de la alerta:</span>
-            <input type="time" id="editHoraAlerta">
-        </div>
-        <div>
-            <span>Descripcion:</span>
-            <textarea id="editDescripcionAlerta"></textarea> <br>
-            <button onclick="actualizarAlerta()">Actualizar alerta</button>
-            <button onclick="eliminarAlerta()">Eliminar alerta</button>
-        </div>
-    </div>
+    </form>
 
     <audio id="alertaSonido" src="../recursos/audio/nicolas (mp3cut.net).mp3" preload="auto"></audio>
 

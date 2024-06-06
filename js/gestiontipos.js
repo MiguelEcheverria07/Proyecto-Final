@@ -9,15 +9,37 @@ const editNombreTipoInput = document.getElementById('editNombreTipo');
 const editTipoInput = document.getElementById('editTipo');
 const editCategoriaInput = document.getElementById('editCategoria');
 const editDescripcionTipoInput = document.getElementById('editDescripcionTipo');
+const forms = document.querySelectorAll('form');
+
+forms.forEach(form => {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (form.checkValidity()) {
+            const submitButton = document.activeElement;
+            if (submitButton.name === 'action') {
+                if (submitButton.value === 'guardar') {
+                    guardarTipo();
+                } else if (submitButton.value === 'editar') {
+                    actualizarTipo();
+                } else if (submitButton.value === 'eliminar') {
+                    eliminarTipo();
+                }
+            }
+        } else {
+            form.reportValidity();
+        }
+    });
+});
 
 function mostrarAgregarTipo() {
-    document.getElementById('add-type').style.display = 'flex';
+    document.getElementById('add-type').style.display = 'block';
     document.getElementById('edit-type').style.display = 'none';
 }
 
 function mostrarEditarTipo() {
     document.getElementById('add-type').style.display = 'none';
-    document.getElementById('edit-type').style.display = 'flex';
+    document.getElementById('edit-type').style.display = 'block';
 }
 
 function limpiarInputsTipo() {
@@ -39,7 +61,7 @@ function guardarTipo() {
     const tipoExistente = Object.keys(localStorage).some(key => key.startsWith('tipo') && JSON.parse(localStorage.getItem(key)).codigo === codigoTipo);
 
     if (tipoExistente) {
-        alert('Ya existe un tipo con el mismo código.');
+        alert('Ya existe un tipo con el mismo código');
         return;
     }
 
