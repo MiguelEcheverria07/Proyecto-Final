@@ -55,8 +55,11 @@ button {
     margin-top: 20px;
 }
 
+/* Menu general */
+
 .body-general {
     transition: all 0.3s;
+    padding: 0 30px 25px 30px;
 }
 
 select,
@@ -71,7 +74,6 @@ select:focus {
 
 .header-menu-general {
     display: flex;
-    width: 75vw;
     justify-content: space-between;
     align-items: center;
 }
@@ -79,7 +81,8 @@ select:focus {
 .menu-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 200px;
+    justify-content: center;
+    gap:6vw;
 }
 
 .request>img {
@@ -94,7 +97,7 @@ select:focus {
     background-color: transparent;
     overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgb(102, 106, 109);
+    box-shadow: 0 0 5px rgb(102, 106, 109);
 }
 
 .request>a {
@@ -107,11 +110,7 @@ select:focus {
 
 .container-general {
     display: flex;
-    margin-top: 50px;
-    flex-direction: column;
-    gap: 100px;
-    justify-content: center;
-    align-items: center;
+    margin-top: 30px;
 }
 
 /* Estilos de analisis */

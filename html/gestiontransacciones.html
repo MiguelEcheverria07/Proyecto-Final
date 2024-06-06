@@ -13,8 +13,8 @@
 <body>
     <div class="header-transaction">
         <div>
-            <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()">Agregar transaccion</a>
-            <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()">Consultar, actualizar o eliminar transacciones</a>
+            <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()" id="link-guardar">Agregar transaccion</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()" id="link-editar">Consultar, actualizar o eliminar transacciones</a>
         </div>
         <div class="topic-container">
             <span>Fuentes y temas:</span>
@@ -41,8 +41,10 @@
             <select id="cuentaAsociada"></select>
             <span>Valor de la transaccion:</span>
             <input type="number" id="valorTransaccion">
-            <span>Fecha de la transaccion:</span>
-            <input type="date" name="" id="fechaTransaccion">
+            <div>
+                <span>Fecha de la transaccion:</span>
+                <input type="date" name="" id="fechaTransaccion">
+            </div>
         </div>
         <div>
             <span>Descripcion</span> <br>

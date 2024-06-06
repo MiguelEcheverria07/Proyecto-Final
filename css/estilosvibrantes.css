@@ -1,14 +1,12 @@
 body {
     background-color: #1a1a1a;
-    color: #ffffff;
     background-image: url(../recursos/imagenes/fondobillete.jpg);
     background-size: 100%;
-    background-repeat: no-repeat;
     top: 0;
     backdrop-filter: blur(20px);
     border-radius: 30px;
-    margin: 50px 65px 50px 65px;
-    height: 80vh;
+    margin: 3.5vw;
+    padding-bottom: 2.8vw;
 }
 
 *{

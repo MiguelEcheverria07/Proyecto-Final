@@ -1,7 +1,7 @@
 var temas = [
-    { value: "temaClaro", text: "Tema claro" },
+    { value: "temaClaro", text: "Tema simple" },
     { value: "temaOscuro", text: "Tema oscuro" },
-    { value: "temaVibrante", text: "Tema vibrante" },
+    { value: "temaVibrante", text: "Tema multivariado" },
 ];
 
 var fuentes = [
@@ -84,3 +84,13 @@ window.onload = function() {
     cargarOpciones();
     aplicarTema();
 };
+
+document.getElementById('link-guardar').addEventListener('click', () => {
+    document.querySelector('#link-editar').classList.remove('selected-link');
+    document.getElementById('link-guardar').classList.add('selected-link');
+});
+
+document.getElementById('link-editar').addEventListener('click', () => {
+    document.querySelector('#link-guardar').classList.remove('selected-link');
+    document.getElementById('link-editar').classList.add('selected-link');
+});

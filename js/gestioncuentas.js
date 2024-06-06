@@ -13,6 +13,29 @@ const editEstadoCuentaInput = document.getElementById('editEstadoCuenta');
 const editFechaCuentaInput = document.getElementById('editFechaCuenta');
 const editDescripcionCuentaInput = document.getElementById('editDescripcionCuenta');
 
+const forms = document.querySelectorAll('form');
+
+forms.forEach(form => {
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (form.checkValidity()) {
+            const submitButton = document.activeElement;
+            if (submitButton.name === 'action') {
+                if (submitButton.value === 'guardar') {
+                    guardarCuenta();
+                } else if (submitButton.value === 'editar') {
+                    editarCuenta();
+                } else if (submitButton.value === 'eliminar') {
+                    eliminarCuenta();
+                }
+            }
+        } else {
+            form.reportValidity();
+        }
+    });
+});
+
 function mostrarAgregarCuenta() {
     document.getElementById('add-account').style.display = 'flex';
     document.getElementById('edit-account').style.display = 'none';
@@ -28,7 +51,7 @@ function guardarCuenta() {
     const cuentaExistente = Object.keys(localStorage).some(key => key.startsWith('numeroCuenta') && JSON.parse(localStorage.getItem(key)).numeroCuenta === numeroCuenta);
 
     if (cuentaExistente) {
-        alert('Ya existe una cuenta con el mismo número.');
+        alert('Ya existe una cuenta con el mismo número');
         return;
     }
 
@@ -93,16 +116,17 @@ function eliminarCuenta() {
 function limpiarInputs() {
     numeroCuenta.value = '';
     nombreBanco.value = '';
-    tipoCuenta.value = 'Ahorros'; 
+    tipoCuenta.value = 'Ahorros';
     fechaCuenta.value = '';
     saldoCuenta.value = '';
     descripcionCuentaInput.value = '';
 
     buscarNumeroCuentaInput.value = '';
     editNombreBancoInput.value = '';
-    editTipoCuentaInput.value = 'Ahorros'; 
+    editTipoCuentaInput.value = 'Ahorros';
     editSaldoCuentaInput.value = '';
-    editEstadoCuentaInput.value = 'Activa'; 
+    editEstadoCuentaInput.value = 'Activa';
     editFechaCuentaInput.value = '';
     editDescripcionCuentaInput.value = '';
 }
+

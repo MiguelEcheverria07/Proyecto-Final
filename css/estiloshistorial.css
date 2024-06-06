@@ -41,14 +41,15 @@ select{
 
 div > button{
     padding: 10px 15px;
+    cursor: pointer;
 }
 
 a{
     text-decoration: none;
     color: black;
-    background-color: #ce8d00;
 }
 
+/* Estilos transacciones */
 .header-transaction, .header-alerts{
     display: flex;
     width: 85vw;
@@ -58,4 +59,17 @@ a{
 
 .header-transaction>div>a, .header-alerts>div>a{
     padding: 10px 15px;
+}
+
+.add-trade>div>div{
+display: flex;
+flex-wrap: wrap;
+}
+
+.selected-link{
+    background-color: rgb(179, 179, 179);
+}
+
+.selected-link:hover{
+    background-color: #bbbbbb;
 }
