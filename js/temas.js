@@ -20,24 +20,15 @@ function cambiarTema(tema) {
 }
 
 function aplicarTema() {
-    // Deshabilitar todas las hojas de estilos de tema
     var hojasEstilos = document.querySelectorAll('link[rel="stylesheet"][id^="tema"]');
     hojasEstilos.forEach(function(hojaEstilo) {
         hojaEstilo.disabled = true;
     });
 
-    // Habilitar la hoja de estilos normal
     document.getElementById("hojaNormal").disabled = false;
-
-    // Habilitar solo la hoja de estilos correspondiente al tema seleccionado
     document.getElementById(temaActual).disabled = false;
-
-    // Actualizar el valor seleccionado en el <select> de temas
     document.getElementById("seleccionarTema").value = temaActual;
 }
-
-
-
 
 function cargarOpciones() {
     var select = document.getElementById("seleccionarTema");

@@ -9,6 +9,7 @@ const editNombreTipoInput = document.getElementById('editNombreTipo');
 const editTipoInput = document.getElementById('editTipo');
 const editCategoriaInput = document.getElementById('editCategoria');
 const editDescripcionTipoInput = document.getElementById('editDescripcionTipo');
+
 const forms = document.querySelectorAll('form');
 
 forms.forEach(form => {
@@ -31,6 +32,16 @@ forms.forEach(form => {
         }
     });
 });
+
+document.getElementById('consultarTipoBtn').addEventListener('click', function () {
+    const codigoTipo = buscarCodigoTipoInput.value;
+    if (codigoTipo.length > 0) {
+        consultarTipo();
+    } else {
+        form.reportValidity();
+    }
+});
+
 
 function mostrarAgregarTipo() {
     document.getElementById('add-type').style.display = 'block';

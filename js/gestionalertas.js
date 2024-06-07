@@ -36,6 +36,15 @@ forms.forEach(form => {
     });
 });
 
+document.getElementById('consultarAlertaBtn').addEventListener('click', function () {
+    const codigoAlerta = buscarCodigoAlertaInput.value;
+    if (codigoAlerta.length > 0) {
+        consultarAlerta();
+    } else {
+        form.reportValidity();
+    }
+});
+
 function limpiarInputsAlerta() {
     codigoAlertaInput.value = '';
     tipoAlertaInput.value = 'Factura';
@@ -164,7 +173,7 @@ function mostrarNotificacionDeNavegador(alerta) {
 
         setTimeout(() => {
             notificacion.close();
-        }, 5000);
+        }, 8000);
     }
 }
 

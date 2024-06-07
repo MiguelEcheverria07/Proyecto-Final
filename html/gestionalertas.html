@@ -13,8 +13,8 @@
 <body>
     <div class="header-alerts">
         <div>
-            <a href="javascript:void(0);" onclick="mostrarAgregarAlerta()">Agregar alertas</a>
-            <a href="javascript:void(0);" onclick="mostrarEditarAlerta()">Consultar, actualizar o eliminar alertas</a>
+            <a href="javascript:void(0);" onclick="mostrarAgregarAlerta()" id="link-guardar" class="selected-link">Agregar alertas</a>
+            <a href="javascript:void(0);" onclick="mostrarEditarAlerta()" id="link-editar">Consultar, actualizar o eliminar alertas</a>
         </div>
         <div class="topic-container">
             <span>Fuentes y temas:</span>
@@ -78,7 +78,7 @@
                     <input type="text" id="buscarCodigoAlerta" required>
                 </div>
                 <div>
-                    <button type="submit" onclick="consultarAlerta()">Consultar</button>
+                    <button type="submit" id="consultarAlertaBtn">Consultar</button>
                 </div>
             </div>
             <div>
@@ -123,7 +123,7 @@
         </div>
     </form>
 
-    <audio id="alertaSonido" src="../recursos/audio/nicolas (mp3cut.net).mp3" preload="auto"></audio>
+    <audio id="alertaSonido" src="../recursos/audio/alert-notification.mp3" preload="auto"></audio>
 
     <script src="../js/gestionalertas.js"></script>
     <script src="../js/temas.js"></script>

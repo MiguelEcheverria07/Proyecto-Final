@@ -37,6 +37,13 @@ forms.forEach(form => {
     });
 });
 
+document.getElementById('consultarTransaccionBtn').addEventListener('click', function () {
+    const codigoTransaccion = buscarCodigoTransaccionInput.value;
+    if (codigoTransaccion.length > 0) {
+        consultarTransaccion();
+    }
+});
+
 function limpiarInputsTransaccion() {
     codigoTransaccionInput.value = '';
     tipoTransaccionInput.value = 'Ingreso';

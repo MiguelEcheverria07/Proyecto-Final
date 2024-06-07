@@ -42,13 +42,13 @@
                 </div>
                 <div>
                     <span>Tipo de ingreso o egreso asociado:</span>
-                    <select id="tipoAsociado"></select>
+                    <select id="tipoAsociado" required></select>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Cuenta bancaria relacionada:</span>
-                    <select id="cuentaAsociada"></select>
+                    <select id="cuentaAsociada" required></select>
                 </div>
                 <div>
                     <span>Valor de la transaccion:</span>
@@ -76,7 +76,7 @@
                     <input type="text" id="buscarCodigoTransaccion" required>    
                 </div>
                 <div>
-                    <button type="submit" onclick="consultarTransaccion()">Consultar</button>
+                    <button type="submit" id="consultarTransaccionBtn">Consultar</button>
                 </div>
             </div>
             <div>
@@ -89,7 +89,7 @@
                 </div>
                 <div>
                     <span>Tipo de ingreso o egreso asociado:</span>
-                    <select id="editTipoAsociado"></select>
+                    <select id="editTipoAsociado" required></select>
                 </div>
                 <div>
                     <span>Fecha de la transaccion:</span>

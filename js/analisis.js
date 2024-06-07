@@ -9,7 +9,7 @@ const categorias = Object.keys(localStorage)
     .map(key => {
         const tipoStr = localStorage.getItem(key);
         const tipo = JSON.parse(tipoStr);
-        return tipo.categoria;
+        return tipo.nombre;
     });
 
 const colores = categorias.map(() => {
@@ -71,7 +71,7 @@ function actualizarGraficoPorMes(mesSeleccionado, tipoTransaccion) {
         const mes = obtenerMes(transaccion.fechaTransaccion);
 
         if (mesSeleccionado === mes && transaccion.tipoTransaccion.toLowerCase() === tipoTransaccion.toLowerCase()) {
-            const dataset = myBarChart.data.datasets.find(dataset => dataset.label === tipo.categoria);
+            const dataset = myBarChart.data.datasets.find(dataset => dataset.label === tipo.nombre);
             if (dataset) {
                 if (!dataset.data[0]) {
                     dataset.data[0] = 0;

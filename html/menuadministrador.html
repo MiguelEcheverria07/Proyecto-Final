@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../css/estilososcuros.css" id="temaOscuro">
     <link rel="stylesheet" href="../css/estilosvibrantes.css" id="temaVibrante">
 </head>
+
 <body>
     <div class="header-admin">
         <h1>Menu administrador</h1>
@@ -20,11 +22,22 @@
         </div>
     </div>
     <div>
-        <div class="request">
-            <a href="gestiontipos.html">Gestión de tipos de ingresos y egresos</a>
+        <div class="request" data-url="gestiontipos.html">
+            <a>Gestión de tipos de ingresos y egresos</a>
             <img src="../recursos/imagenes/ingresos.png" alt="">
         </div>
     </div>
     <script src="../js/temas.js"></script>
 </body>
+
+<script>
+    const contenedores = document.querySelectorAll('.request');
+    contenedores.forEach(element => {
+        element.addEventListener('click', () => {
+            const url = element.getAttribute('data-url');
+            window.location.href = url;
+        });
+    });
+</script>
+
 </html>

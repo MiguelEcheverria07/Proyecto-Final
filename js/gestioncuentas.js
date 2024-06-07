@@ -32,10 +32,19 @@ forms.forEach(form => {
             }
         } else {
             form.reportValidity();
-
         }
     });
 });
+
+document.getElementById('consultarCuentaBtn').addEventListener('click', function () {
+    const numeroCuenta = buscarNumeroCuentaInput.value;
+    if (numeroCuenta.length > 0) {
+        consultarCuenta();
+    } else {
+        form.reportValidity();
+    }
+});
+
 
 function mostrarAgregarCuenta() {
     document.getElementById('add-account').style.display = 'flex';
