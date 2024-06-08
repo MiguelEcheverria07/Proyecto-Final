@@ -131,7 +131,7 @@ function guardarTransaccion() {
     const transaccion = {
         codigo: codigoTransaccion,
         tipoTransaccion: tipoTransaccionInput.value,
-        tipoAsociado: tipoAsociadoInput.value,  // Guardar el ID del tipo asociado
+        tipoAsociado: tipoAsociadoInput.value,  
         cuentaAsociada: cuentaAsociadaInput.value,
         valor: valorTransaccionInput.value,
         fechaTransaccion: fechaTransaccionInput.value,

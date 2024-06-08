@@ -30,7 +30,7 @@
     <form action="#">
         <div class="add-type" id="add-type">
             <div>
-                <span>Codigo:</span>
+                <span>Código:</span>
                 <input type="text" id="codigoTipo" required>
                 <span>Nombre del tipo</span>
                 <input type="text" id="nombreTipo" required>
@@ -41,11 +41,11 @@
                 </select>
             </div><br>
             <div>
-                <span>Categoria:</span>
+                <span>Categoría:</span>
                 <input type="text" id="categoria">
             </div>
             <div style="display: block;">
-                <span>Descripcion</span><br>
+                <span>Descripción</span><br>
                 <textarea id="descripcionTipo" style="width: 200px; height: 40px;"></textarea><br>
                 <button type="submit" name="action" value="guardar">Guardar tipo</button>
             </div>
@@ -54,7 +54,7 @@
     <form action="#">
         <div class="edit-type" id="edit-type" style="display: none;">
             <div>
-                <span>Ingrese el codigo:</span>
+                <span>Ingrese el código:</span>
                 <input type="text" id="buscarCodigoTipo" required>
                 <button type="submit" id="consultarTipoBtn">Consultar</button>
             </div>
@@ -66,17 +66,22 @@
                     <option value="Ingreso">Ingreso</option>
                     <option value="Egreso">Egreso</option>
                 </select>
-                <span>Categoria:</span>
+                <span>Categoría:</span>
                 <input type="text" id="editCategoria">
             </div>
             <div>
-                <span>Descripcion</span><br>
+                <span>Descripción</span><br>
                 <textarea id="editDescripcionTipo" style="width: 200px; height: 40px;"></textarea><br>
                 <button type="submit" name="action" value="editar">Actualizar tipo</button>
                 <button type="submit" name="action" value="eliminar">Eliminar tipo</button>
             </div>
         </div>
     </form>
+    <div class="menu-back">
+        <div>
+            <a href="menuadministrador.html">Regresar al menú</a>
+        </div>
+    </div>
     <script src="../js/gestiontipos.js"></script>
     <script src="../js/temas.js"></script>
 </body>

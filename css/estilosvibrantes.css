@@ -103,7 +103,9 @@ span {
 
 button,
 a,
-.request>a {
+.request>a,
+.menu-back>div>a,
+.menu-back>a {
     animation: glow 3s infinite alternate;
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
@@ -130,7 +132,9 @@ a,
 }
 
 .select-selected:hover,
-.request>a:hover {
+.request>a:hover,
+.menu-back>div>a:hover,
+.menu-back>a:hover {
     background-color: #f1f1f1;
 }
 

@@ -14,7 +14,7 @@
     <div class="header-trade">
         <div>
             <a href="javascript:void(0);" onclick="mostrarAgregarTransaccion()" id="link-guardar" class="selected-link">Agregar
-                transaccion</a>
+                transacciones</a>
             <a href="javascript:void(0);" onclick="mostrarEditarTransaccion()" id="link-editar">Consultar, actualizar o
                 eliminar transacciones</a>
         </div>
@@ -30,11 +30,11 @@
         <div id="add-trade" class="add-trade">
             <div>
                 <div>
-                    <span>Codigo de transaccion:</span>
+                    <span>Código de transaccion:</span>
                     <input type="text" id="codigoTransaccion" required>
                 </div>
                 <div>
-                    <span>Tipo de transaccion:</span>
+                    <span>Tipo de transacción:</span>
                     <select id="tipoTransaccion">
                         <option value="Ingreso">Ingreso</option>
                         <option value="Egreso">Egreso</option>
@@ -51,17 +51,17 @@
                     <select id="cuentaAsociada" required></select>
                 </div>
                 <div>
-                    <span>Valor de la transaccion:</span>
+                    <span>Valor de la transacción:</span>
                     <input type="number" id="valorTransaccion" required>
                 </div>
                 <div>
-                    <span>Fecha de la transaccion:</span>
+                    <span>Fecha de la transacción:</span>
                     <input type="date" name="" id="fechaTransaccion" required>
                 </div>
             </div>
             <div>
                 <div>
-                    <span>Descripcion</span> <br>
+                    <span>Descripción</span> <br>
                     <textarea id="descripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> <br>
                     <button type="submit" name="action" value="guardar">Guardar transaccion</button>
                 </div>
@@ -72,7 +72,7 @@
         <div id="edit-trade" class="edit-trade" style="display: none;">
             <div>
                 <div>
-                    <span>Ingrese el codigo:</span>
+                    <span>Ingrese el código:</span>
                     <input type="text" id="buscarCodigoTransaccion" required>    
                 </div>
                 <div>
@@ -81,7 +81,7 @@
             </div>
             <div>
                 <div>
-                    <span>Tipo de transaccion:</span>
+                    <span>Tipo de transacción:</span>
                     <select id="editTipoTransaccion">
                         <option value="Ingreso">Ingreso</option>
                         <option value="Egreso">Egreso</option>
@@ -92,7 +92,7 @@
                     <select id="editTipoAsociado" required></select>
                 </div>
                 <div>
-                    <span>Fecha de la transaccion:</span>
+                    <span>Fecha de la transacción:</span>
                     <input type="date" id="editFechaTransaccion" required>
                 </div>
             </div>
@@ -102,13 +102,13 @@
                     <select id="editCuentaAsociada"></select>
                 </div>
                 <div>
-                    <span>Valor de la transaccion:</span>
+                    <span>Valor de la transacción:</span>
                     <input type="number" id="editValorTransaccion" required>
                 </div>
             </div>
             <div>
                 <div>
-                    <span>Descripcion</span> 
+                    <span>Descripción</span> 
                     <textarea id="editDescripcionTransaccion" style="width: 25vw; height: 50px;"></textarea> 
                 </div>
                 <div>
@@ -118,6 +118,11 @@
             </div>
         </div>
     </form>
+    <div class="menu-back">
+        <div>
+            <a href="menugeneral.html">Regresar al menú</a>
+        </div>
+    </div>
     <script src="../js/gestionstransacciones.js"></script>
     <script src="../js/temas.js"></script>
 </body>
