@@ -157,7 +157,8 @@ th {
     background-color: #cacaca;
 }
 
-.selected-link:hover, .menu-back>div>a:hover {
+.selected-link:hover,
+.menu-back>div>a:hover {
     background-color: #bbbbbb;
 }
 
@@ -335,13 +336,13 @@ img {
     margin-top: 15px;
 }
 
-.menu-back>div>a{
+.menu-back>div>a {
     background-color: #a5a5a5;
     font-weight: 500;
     right: 0;
 }
 
-.menu-back{
+.menu-back {
     display: flex;
     justify-content: flex-end;
     align-items: center;

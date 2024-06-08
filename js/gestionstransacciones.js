@@ -124,14 +124,14 @@ function guardarTransaccion() {
     const transaccionExistente = Object.keys(localStorage).some(key => key.startsWith('transaccion') && JSON.parse(localStorage.getItem(key)).codigo === codigoTransaccion);
 
     if (transaccionExistente) {
-        alert('Ya existe una transacción con el mismo código');
+        alert('Ya existe una transacción con el código' + codigoTransaccion);
         return;
     }
 
     const transaccion = {
         codigo: codigoTransaccion,
         tipoTransaccion: tipoTransaccionInput.value,
-        tipoAsociado: tipoAsociadoInput.value,  
+        tipoAsociado: tipoAsociadoInput.value,
         cuentaAsociada: cuentaAsociadaInput.value,
         valor: valorTransaccionInput.value,
         fechaTransaccion: fechaTransaccionInput.value,
@@ -140,9 +140,10 @@ function guardarTransaccion() {
 
     if (actualizarSaldoCuenta(transaccion.cuentaAsociada, transaccion.valor, transaccion.tipoTransaccion)) {
         localStorage.setItem('transaccion' + transaccion.codigo, JSON.stringify(transaccion));
-        alert('Transacción guardada exitosamente.');
+        alert('Transacción guardada exitosamente');
         limpiarInputsTransaccion();
         cargarTiposYCuentas();
+        codigoTransaccionInput.focus();
     }
 }
 
@@ -159,7 +160,10 @@ function consultarTransaccion() {
         editFechaTransaccionInput.value = transaccion.fechaTransaccion;
         editDescripcionTransaccionInput.value = transaccion.descripcion;
     } else {
-        alert('No se encontró la transacción con el código proporcionado');
+        alert('No se encontró la transacción con el código ' + codigoTransaccion);
+        limpiarInputsTransaccion();
+        cargarTiposYCuentas();
+        buscarCodigoTransaccionInput.focus();
     }
 }
 
@@ -183,12 +187,14 @@ function actualizarTransaccion() {
 
         if (actualizarSaldoCuenta(transaccion.cuentaAsociada, transaccion.valor, transaccion.tipoTransaccion)) {
             localStorage.setItem('transaccion' + codigoTransaccion, JSON.stringify(transaccion));
-            alert('Transacción actualizada exitosamente.');
+            alert('Transacción actualizada exitosamente');
             limpiarInputsTransaccion();
             cargarTiposYCuentas();
+            buscarCodigoTransaccionInput.focus();
         }
     } else {
-        alert('No se encontró la transacción con el código proporcionado');
+        alert('No se encontró la transacción con el código ' + codigoTransaccion);
+        buscarCodigoTransaccionInput.focus();
     }
 }
 
@@ -200,11 +206,13 @@ function eliminarTransaccion() {
     if (transaccion) {
         revertirSaldoCuenta(transaccion.cuentaAsociada, transaccion.valor, transaccion.tipoTransaccion);
         localStorage.removeItem('transaccion' + codigoTransaccion);
-        alert('Transacción eliminada exitosamente.');
+        alert('Transacción eliminada exitosamente');
         limpiarInputsTransaccion();
         cargarTiposYCuentas();
+        buscarCodigoTransaccionInput.focus();
     } else {
-        alert('No se encontró la transacción con el código proporcionado');
+        alert('No se encontró la transacción con el código ' +  codigoTransaccion);
+        buscarCodigoTransaccionInput.focus();
     }
 }
 
@@ -217,5 +225,3 @@ function mostrarEditarTransaccion() {
     document.getElementById('add-trade').style.display = 'none';
     document.getElementById('edit-trade').style.display = 'flex';
 }
-
-

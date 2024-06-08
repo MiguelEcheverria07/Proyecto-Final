@@ -42,7 +42,6 @@ document.getElementById('consultarTipoBtn').addEventListener('click', function (
     }
 });
 
-
 function mostrarAgregarTipo() {
     document.getElementById('add-type').style.display = 'block';
     document.getElementById('edit-type').style.display = 'none';
@@ -56,13 +55,13 @@ function mostrarEditarTipo() {
 function limpiarInputsTipo() {
     codigoTipoInput.value = '';
     nombreTipoInput.value = '';
-    tipoInput.value = ''; 
+    tipoInput.value = '';
     categoriaInput.value = '';
     descripcionTipoInput.value = '';
 
     buscarCodigoTipoInput.value = '';
     editNombreTipoInput.value = '';
-    editTipoInput.value = ''; 
+    editTipoInput.value = '';
     editCategoriaInput.value = '';
     editDescripcionTipoInput.value = '';
 }
@@ -72,7 +71,7 @@ function guardarTipo() {
     const tipoExistente = Object.keys(localStorage).some(key => key.startsWith('tipo') && JSON.parse(localStorage.getItem(key)).codigo === codigoTipo);
 
     if (tipoExistente) {
-        alert('Ya existe un tipo con el mismo código');
+        alert('Ya existe un tipo con el código' + codigoTipo);
         return;
     }
 
@@ -85,7 +84,7 @@ function guardarTipo() {
     };
     localStorage.setItem('tipo' + tipo.codigo, JSON.stringify(tipo));
     alert('Tipo guardado exitosamente');
-    limpiarInputsTipo(); 
+    limpiarInputsTipo();
 }
 
 
@@ -100,27 +99,43 @@ function consultarTipo() {
         editCategoriaInput.value = tipo.categoria;
         editDescripcionTipoInput.value = tipo.descripcion;
     } else {
-        alert('No se encontró el tipo con el código proporcionado');
+        alert('No se encontró el tipo con el código ' + codigoTipo);
     }
 }
 
 function actualizarTipo() {
     const codigoTipo = buscarCodigoTipoInput.value;
-    const tipo = {
-        codigo: codigoTipo,
-        nombre: editNombreTipoInput.value,
-        tipo: editTipoInput.value,
-        categoria: editCategoriaInput.value,
-        descripcion: editDescripcionTipoInput.value
-    };
-    localStorage.setItem('tipo' + codigoTipo, JSON.stringify(tipo));
-    alert('Tipo actualizado exitosamente');
-    limpiarInputsTipo(); 
+    const tipoStr = localStorage.getItem('tipo' + codigoTipo);
+    const tipoAnterior = JSON.parse(tipoStr);
+    if (tipoAnterior) {
+        const tipo = {
+            codigo: codigoTipo,
+            nombre: editNombreTipoInput.value,
+            tipo: editTipoInput.value,
+            categoria: editCategoriaInput.value,
+            descripcion: editDescripcionTipoInput.value
+        };
+        localStorage.setItem('tipo' + codigoTipo, JSON.stringify(tipo));
+        alert('Tipo actualizado exitosamente');
+        limpiarInputsTipo();
+        buscarCodigoTipoInput.focus();
+    } else {
+        alert('No se encontró el tipo con el código ' + codigoTipo);
+        buscarCodigoTipoInput.focus();
+    }
 }
 
 function eliminarTipo() {
     const codigoTipo = buscarCodigoTipoInput.value;
-    localStorage.removeItem('tipo' + codigoTipo);
-    alert('Tipo eliminado exitosamente');
-    limpiarInputsTipo(); 
+    const tipoStr = localStorage.getItem('tipo' + codigoTipo);
+    const tipoAnterior = JSON.parse(tipoStr);
+    if (tipoAnterior) {
+        localStorage.removeItem('tipo' + codigoTipo);
+        alert('Tipo eliminado exitosamente');
+        limpiarInputsTipo();
+        buscarCodigoTipoInput.focus();
+    } else {
+        alert('No se encontró el tipo con el código ' + codigoTipo);
+        buscarCodigoTipoInput.focus();
+    }
 }

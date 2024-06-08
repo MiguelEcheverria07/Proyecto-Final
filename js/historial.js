@@ -10,8 +10,8 @@ const tipos = Object.keys(localStorage)
 
 tipos.forEach(tipo => {
     const option = document.createElement('option');
-    option.value = tipo.categoria;
-    option.textContent = tipo.categoria;
+    option.value = tipo.nombre;
+    option.textContent = tipo.nombre;
     categoriaSelect.appendChild(option);
 });
 
@@ -24,7 +24,7 @@ function mostrarTransacciones(transacciones) {
         const tipoEncontrado = tipos.find(t => t.codigo === transaccion.tipoAsociado);
         const row = transaccionesTable.insertRow();
         row.insertCell(0).textContent = transaccion.tipoTransaccion;
-        row.insertCell(1).textContent = tipoEncontrado ? tipoEncontrado.categoria : '';
+        row.insertCell(1).textContent = tipoEncontrado ? tipoEncontrado.nombre : '';
         row.insertCell(2).textContent = transaccion.valor;
         row.insertCell(3).textContent = transaccion.fechaTransaccion;
     });
@@ -43,13 +43,6 @@ function filtrarTransacciones() {
     let hasta = hastaInput.value ? new Date(hastaInput.value) : null;
 
     if (desde) {
-        desde = new Date(desde.getTime() + 86400000);
-    }
-    if (hasta) {
-        hasta = new Date(hasta.getTime() + 86400000);
-    }
-
-    if (desde) {
         desde.setHours(0, 0, 0, 0);
     }
     if (hasta) {
@@ -59,13 +52,9 @@ function filtrarTransacciones() {
     const transaccionesFiltradas = transacciones.filter(transaccion => {
         const tipoEncontrado = tipos.find(t => t.codigo === transaccion.tipoAsociado);
         const transaccionFecha = new Date(transaccion.fechaTransaccion);
-        if (isNaN(transaccionFecha.getTime())) {
-            console.error("Fecha inválida en la transacción:", transaccion);
-            return false;
-        }
         transaccionFecha.setHours(0, 0, 0, 0);
 
-        const categoriaCoincide = categoria === 'Todas' || (tipoEncontrado && tipoEncontrado.categoria === categoria);
+        const categoriaCoincide = categoria === 'Todas' || (tipoEncontrado && tipoEncontrado.nombre === categoria);
         const tipoCoincide = !tipo || transaccion.tipoTransaccion === tipo;
         const desdeCoincide = !desde || transaccionFecha >= desde;
         const hastaCoincide = !hasta || transaccionFecha <= hasta;

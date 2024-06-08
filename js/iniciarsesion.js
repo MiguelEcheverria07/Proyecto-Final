@@ -1,9 +1,9 @@
-function iniciarSesion(){
-var user = document.getElementById('user').value;
-var password = document.getElementById('password').value;
-    if(user === "general" && password === "123") {
+function iniciarSesion() {
+    var user = document.getElementById('user').value;
+    var password = document.getElementById('password').value;
+    if (user === "general" && password === "123") {
         window.location.href = 'html/menugeneral.html';
-    }else if (user === "administrador" && password === "123") {
+    } else if (user === "administrador" && password === "123") {
         window.location.href = "html/menuadministrador.html";
     } else {
         alert("Usuario o contraseña errado");
@@ -17,8 +17,8 @@ function nuevo() {
     user.focus();
 }
 
-function inciarConEnter(event){
-    if(event.key === 'Enter'){
+function inciarConEnter(event) {
+    if (event.key === 'Enter') {
         event.preventDefault();
         iniciarSesion();
     }
@@ -26,7 +26,7 @@ function inciarConEnter(event){
 
 user.addEventListener('keypress', inciarConEnter);
 password.addEventListener('keypress', inciarConEnter);
-document.getElementById('loginBtn').addEventListener('submit', function(event){
+document.getElementById('loginBtn').addEventListener('submit', function (event) {
     event.preventDefault();
     iniciarSesion();
 });

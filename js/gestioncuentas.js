@@ -61,7 +61,7 @@ function guardarCuenta() {
     const cuentaExistente = Object.keys(localStorage).some(key => key.startsWith('numeroCuenta') && JSON.parse(localStorage.getItem(key)).numeroCuenta === numeroCuenta);
 
     if (cuentaExistente) {
-        alert('Ya existe una cuenta con el mismo número');
+        alert('Ya existe una cuenta con el número ' + numeroCuenta);
         return;
     }
 
@@ -94,33 +94,49 @@ function consultarCuenta() {
         editFechaCuentaInput.value = cuenta.fechaCuenta;
         editDescripcionCuentaInput.value = cuenta.descripcionCuenta;
     } else {
-        alert('No se encontró la cuenta con el número proporcionado');
+        alert('No se encontró la cuenta con el número ' + numeroCuenta);
+        limpiarInputs();
+        buscarNumeroCuentaInput.focus();
     }
 }
 
 function actualizarCuenta() {
     const numeroCuenta = buscarNumeroCuentaInput.value;
-    const cuenta = {
-        numeroCuenta: numeroCuenta,
-        nombreBanco: editNombreBancoInput.value,
-        tipoCuenta: editTipoCuentaInput.value,
-        estadoCuenta: editEstadoCuentaInput.value,
-        fechaCuenta: editFechaCuentaInput.value,
-        saldoCuenta: editSaldoCuentaInput.value,
-        descripcionCuenta: editDescripcionCuentaInput.value
-    };
-    localStorage.setItem('numeroCuenta' + numeroCuenta, JSON.stringify(cuenta));
-    alert('Cuenta actualizada exitosamente');
-    limpiarInputs();
-    buscarNumeroCuentaInput.focus();
+    const cuentaAnteriorStr = localStorage.getItem('numeroCuenta' + numeroCuenta);
+    const cuentaAnterior = JSON.parse(cuentaAnteriorStr);
+    if (cuentaAnterior) {
+        const cuenta = {
+            numeroCuenta: numeroCuenta,
+            nombreBanco: editNombreBancoInput.value,
+            tipoCuenta: editTipoCuentaInput.value,
+            estadoCuenta: editEstadoCuentaInput.value,
+            fechaCuenta: editFechaCuentaInput.value,
+            saldoCuenta: editSaldoCuentaInput.value,
+            descripcionCuenta: editDescripcionCuentaInput.value
+        };
+        localStorage.setItem('numeroCuenta' + numeroCuenta, JSON.stringify(cuenta));
+        alert('Cuenta actualizada exitosamente');
+        limpiarInputs();
+        buscarNumeroCuentaInput.focus();
+    } else {
+        alert('No se encontró la cuenta con el número ' + numeroCuenta);
+        buscarNumeroCuentaInput.focus();
+    }
 }
 
 function eliminarCuenta() {
     const numeroCuenta = buscarNumeroCuentaInput.value;
-    localStorage.removeItem('numeroCuenta' + numeroCuenta);
-    alert('Cuenta eliminada exitosamente');
-    limpiarInputs();
-    buscarNumeroCuentaInput.focus();
+    const cuentaStr = localStorage.getItem('numeroCuenta' + numeroCuenta);
+    const cuenta = JSON.parse(cuentaStr);
+    if (cuenta) {
+        localStorage.removeItem('numeroCuenta' + numeroCuenta);
+        alert('Cuenta eliminada exitosamente');
+        limpiarInputs();
+        buscarNumeroCuentaInput.focus();
+    } else {
+        alert('No se encontró la cuenta con el número ' + numeroCuenta);
+        buscarNumeroCuentaInput.focus();
+    }
 }
 
 function limpiarInputs() {
@@ -139,4 +155,3 @@ function limpiarInputs() {
     editFechaCuentaInput.value = '';
     editDescripcionCuentaInput.value = '';
 }
-

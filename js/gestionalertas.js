@@ -40,8 +40,6 @@ document.getElementById('consultarAlertaBtn').addEventListener('click', function
     const codigoAlerta = buscarCodigoAlertaInput.value;
     if (codigoAlerta.length > 0) {
         consultarAlerta();
-    } else {
-        form.reportValidity();
     }
 });
 
@@ -61,16 +59,12 @@ function limpiarInputsAlerta() {
     editDescripcionAlertaInput.value = '';
 }
 
-function mostrarNotificacion(mensaje) {
-    alert(mensaje);
-}
-
 function guardarAlerta() {
     const codigoAlerta = codigoAlertaInput.value;
     const alertaExistente = Object.keys(localStorage).some(key => key.startsWith('alerta') && JSON.parse(localStorage.getItem(key)).codigo === codigoAlerta);
 
     if (alertaExistente) {
-        mostrarNotificacion('Ya existe una alerta con el mismo código');
+        alert('Ya existe una alerta con el mismo código');
         return;
     }
 
@@ -83,9 +77,10 @@ function guardarAlerta() {
         descripcion: descripcionAlertaInput.value
     };
     localStorage.setItem('alerta' + alerta.codigo, JSON.stringify(alerta));
-    mostrarNotificacion('Alerta guardada exitosamente');
-    programarAlerta(alerta); 
-    limpiarInputsAlerta(); 
+    alert('Alerta guardada exitosamente');
+    programarAlerta(alerta);
+    limpiarInputsAlerta();
+    codigoAlertaInput.focus();
 }
 
 
@@ -101,31 +96,50 @@ function consultarAlerta() {
         editHoraAlertaInput.value = alerta.hora;
         editDescripcionAlertaInput.value = alerta.descripcion;
     } else {
-        mostrarNotificacion('No se encontró la alerta con el código proporcionado');
+        alert('No se encontró la alerta con el código ' + codigoAlerta);
+        limpiarInputsAlerta();
+        buscarCodigoAlertaInput.focus();
     }
 }
 
 function actualizarAlerta() {
     const codigoAlerta = buscarCodigoAlertaInput.value;
-    const alerta = {
-        codigo: codigoAlerta,
-        tipoAlerta: editTipoAlertaInput.value,
-        opcionRepeticion: editOpcionRepeticionInput.value,
-        fecha: editFechaAlertaInput.value,
-        hora: editHoraAlertaInput.value,
-        descripcion: editDescripcionAlertaInput.value
-    };
-    localStorage.setItem('alerta' + codigoAlerta, JSON.stringify(alerta));
-    mostrarNotificacion('Alerta actualizada exitosamente');
-    programarAlerta(alerta); 
-    limpiarInputsAlerta(); 
+    const alertaAnteriorStr = localStorage.getItem('alerta' + codigoAlerta);
+    const alertaAnterior = JSON.parse(alertaAnteriorStr);
+    if (alertaAnterior) {
+        const alerta = {
+            codigo: codigoAlerta,
+            tipoAlerta: editTipoAlertaInput.value,
+            opcionRepeticion: editOpcionRepeticionInput.value,
+            fecha: editFechaAlertaInput.value,
+            hora: editHoraAlertaInput.value,
+            descripcion: editDescripcionAlertaInput.value
+        };
+        localStorage.setItem('alerta' + codigoAlerta, JSON.stringify(alerta));
+        alert('Alerta actualizada exitosamente');
+        programarAlerta(alerta);
+        limpiarInputsAlerta();
+        buscarCodigoAlertaInput.focus();
+    } else {
+        alert('No se encontró la alerta con el código ' + codigoAlerta);
+        buscarCodigoAlertaInput.focus();
+    }
+
 }
 
 function eliminarAlerta() {
     const codigoAlerta = buscarCodigoAlertaInput.value;
-    localStorage.removeItem('alerta' + codigoAlerta);
-    mostrarNotificacion('Alerta eliminada exitosamente');
-    limpiarInputsAlerta();
+    const alertaAnteriorStr = localStorage.getItem('alerta' + codigoAlerta);
+    const alertaAnterior = JSON.parse(alertaAnteriorStr);
+    if (alertaAnterior) {
+        localStorage.removeItem('alerta' + codigoAlerta);
+        alert('Alerta eliminada exitosamente');
+        limpiarInputsAlerta();
+        buscarCodigoAlertaInput.focus();
+    } else {
+        alert('No se encontró la alerta con el código ' + codigoAlerta);
+        buscarCodigoAlertaInput.focus();
+    }
 }
 
 function mostrarAgregarAlerta() {
@@ -142,11 +156,11 @@ function solicitarPermisoNotificaciones() {
     if (Notification.permission !== 'granted') {
         Notification.requestPermission().then(permission => {
             if (permission === 'granted') {
-                programarNotificacionesExistentes(); 
+                programarNotificacionesExistentes();
             }
         });
     } else {
-        programarNotificacionesExistentes(); 
+        programarNotificacionesExistentes();
     }
 }
 
@@ -156,20 +170,20 @@ function programarAlerta(alerta) {
 
     if (tiempoRestante > 0) {
         setTimeout(() => {
-            mostrarNotificacionDeNavegador(alerta);
+            alertDeNavegador(alerta);
         }, tiempoRestante);
     }
 }
 
-function mostrarNotificacionDeNavegador(alerta) {
+function alertDeNavegador(alerta) {
     if (Notification.permission === 'granted') {
         const opciones = {
             body: `${alerta.tipoAlerta}\n${alerta.descripcion}`,
-            icon: 'path/to/icon.png' 
+            icon: 'path/to/icon.png'
         };
 
         const notificacion = new Notification(`Alerta: ${alerta.tipoAlerta}`, opciones);
-        alertaSonido.play(); 
+        alertaSonido.play();
 
         setTimeout(() => {
             notificacion.close();

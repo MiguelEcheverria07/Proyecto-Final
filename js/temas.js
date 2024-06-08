@@ -21,7 +21,7 @@ function cambiarTema(tema) {
 
 function aplicarTema() {
     var hojasEstilos = document.querySelectorAll('link[rel="stylesheet"][id^="tema"]');
-    hojasEstilos.forEach(function(hojaEstilo) {
+    hojasEstilos.forEach(function (hojaEstilo) {
         hojaEstilo.disabled = true;
     });
 
@@ -33,13 +33,13 @@ function aplicarTema() {
 function cargarOpciones() {
     var select = document.getElementById("seleccionarTema");
     select.innerHTML = "";
-    temas.forEach(function(tema) {
+    temas.forEach(function (tema) {
         var option = document.createElement("option");
         option.value = tema.value;
         option.text = tema.text;
         select.appendChild(option);
     });
-    select.value = temaActual; 
+    select.value = temaActual;
 }
 
 function cambiarFuente(fuente) {
@@ -56,7 +56,7 @@ function aplicarFuente() {
 function cargarOpcionesFuente() {
     var selectFuente = document.getElementById("seleccionarFuente");
     selectFuente.innerHTML = "";
-    fuentes.forEach(function(fuente) {
+    fuentes.forEach(function (fuente) {
         var optionFont = document.createElement("option");
         optionFont.value = fuente.value;
         optionFont.text = fuente.text;
@@ -66,7 +66,7 @@ function cargarOpcionesFuente() {
 
 }
 
-window.onload = function() {
+window.onload = function () {
     if (window.location.pathname.includes('gestiontransacciones.html')) {
         cargarTiposYCuentas();
     }
