@@ -13,9 +13,9 @@ const editHoraAlertaInput = document.getElementById('editHoraAlerta');
 const editDescripcionAlertaInput = document.getElementById('editDescripcionAlerta');
 
 const alertaSonido = document.getElementById('alertaSonido');
-const forms = document.querySelectorAll('form');
+const formsAlertas = document.querySelectorAll('form');
 
-forms.forEach(form => {
+formsAlertas.forEach(form => {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -36,12 +36,7 @@ forms.forEach(form => {
     });
 });
 
-document.getElementById('consultarAlertaBtn').addEventListener('click', function () {
-    const codigoAlerta = buscarCodigoAlertaInput.value;
-    if (codigoAlerta.length > 0) {
-        consultarAlerta();
-    }
-});
+
 
 function limpiarInputsAlerta() {
     codigoAlertaInput.value = '';
@@ -201,6 +196,9 @@ function programarNotificacionesExistentes() {
     });
 }
 
-window.onload = () => {
-    solicitarPermisoNotificaciones();
-};
+document.getElementById('consultarAlertaBtn').addEventListener('click', function () {
+    const codigoAlerta = buscarCodigoAlertaInput.value;
+    if (codigoAlerta.length > 0) {
+        consultarAlerta();
+    }
+});

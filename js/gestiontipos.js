@@ -55,13 +55,13 @@ function mostrarEditarTipo() {
 function limpiarInputsTipo() {
     codigoTipoInput.value = '';
     nombreTipoInput.value = '';
-    tipoInput.value = '';
+    tipoInput.value = 'Ingreso';
     categoriaInput.value = '';
     descripcionTipoInput.value = '';
 
     buscarCodigoTipoInput.value = '';
     editNombreTipoInput.value = '';
-    editTipoInput.value = '';
+    editTipoInput.value = 'Ingreso';
     editCategoriaInput.value = '';
     editDescripcionTipoInput.value = '';
 }
@@ -71,7 +71,7 @@ function guardarTipo() {
     const tipoExistente = Object.keys(localStorage).some(key => key.startsWith('tipo') && JSON.parse(localStorage.getItem(key)).codigo === codigoTipo);
 
     if (tipoExistente) {
-        alert('Ya existe un tipo con el código' + codigoTipo);
+        alert('Ya existe un tipo con el código ' + codigoTipo);
         return;
     }
 

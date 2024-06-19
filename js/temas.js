@@ -70,13 +70,11 @@ window.onload = function () {
     if (window.location.pathname.includes('gestiontransacciones.html')) {
         cargarTiposYCuentas();
     }
-    if (window.location.pathname.includes('gestionalertas.html')) {
-        solicitarPermisoNotificaciones();
-    }
     cargarOpcionesFuente();
     aplicarFuente();
     cargarOpciones();
     aplicarTema();
+    solicitarPermisoNotificaciones();
 };
 
 document.getElementById('link-guardar').addEventListener('click', () => {

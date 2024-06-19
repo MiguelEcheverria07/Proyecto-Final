@@ -40,9 +40,7 @@ document.getElementById('consultarCuentaBtn').addEventListener('click', function
     const numeroCuenta = buscarNumeroCuentaInput.value;
     if (numeroCuenta.length > 0) {
         consultarCuenta();
-    } else {
-        form.reportValidity();
-    }
+    } 
 });
 
 

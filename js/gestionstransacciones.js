@@ -13,7 +13,7 @@ const editCuentaAsociadaInput = document.getElementById('editCuentaAsociada');
 const editValorTransaccionInput = document.getElementById('editValorTransaccion');
 const editFechaTransaccionInput = document.getElementById('editFechaTransaccion');
 const editDescripcionTransaccionInput = document.getElementById('editDescripcionTransaccion');
-
+let agregando = true;
 const forms = document.querySelectorAll('form');
 
 forms.forEach(form => {
@@ -47,19 +47,30 @@ document.getElementById('consultarTransaccionBtn').addEventListener('click', fun
 function limpiarInputsTransaccion() {
     codigoTransaccionInput.value = '';
     tipoTransaccionInput.value = 'Ingreso';
-    tipoAsociadoInput.innerHTML = '';
-    cuentaAsociadaInput.innerHTML = '';
     valorTransaccionInput.value = '';
     fechaTransaccionInput.value = '';
     descripcionTransaccionInput.value = '';
 
     buscarCodigoTransaccionInput.value = '';
     editTipoTransaccionInput.value = 'Ingreso';
-    editTipoAsociadoInput.innerHTML = '';
-    editCuentaAsociadaInput.innerHTML = '';
     editValorTransaccionInput.value = '';
     editFechaTransaccionInput.value = '';
     editDescripcionTransaccionInput.value = '';
+}
+
+function limpiarTiposYCuentas() {
+    while (tipoAsociadoInput.options.length > 0) {
+        tipoAsociadoInput.remove(0);
+    }
+    while (editTipoAsociadoInput.options.length > 0) {
+        editTipoAsociadoInput.remove(0);
+    }
+    while (cuentaAsociadaInput.options.length > 0) {
+        cuentaAsociadaInput.remove(0);
+    }
+    while (editCuentaAsociadaInput.options.length > 0) {
+        editCuentaAsociadaInput.remove(0);
+    }
 }
 
 function cargarTiposYCuentas() {
@@ -68,10 +79,17 @@ function cargarTiposYCuentas() {
         if (key.startsWith('tipo')) {
             const tipo = JSON.parse(localStorage.getItem(key));
             const option = document.createElement('option');
-            option.value = tipo.codigo;
-            option.textContent = tipo.nombre;
-            tipoAsociadoInput.appendChild(option);
-            editTipoAsociadoInput.appendChild(option.cloneNode(true));
+            if (tipoTransaccionInput.value === tipo.tipo && agregando === true) {
+                option.value = tipo.codigo;
+                option.textContent = tipo.nombre;
+                tipoAsociadoInput.appendChild(option);
+            }
+
+            if (editTipoTransaccionInput.value === tipo.tipo && agregando !== true) {
+                option.value = tipo.codigo;
+                option.textContent = tipo.nombre;
+                editTipoAsociadoInput.appendChild(option);
+            }
         }
     }
 
@@ -80,10 +98,15 @@ function cargarTiposYCuentas() {
         if (key.startsWith('numeroCuenta')) {
             const cuenta = JSON.parse(localStorage.getItem(key));
             const option = document.createElement('option');
-            option.value = cuenta.numeroCuenta;
-            option.textContent = `${cuenta.numeroCuenta} - ${cuenta.nombreBanco}`;
-            cuentaAsociadaInput.appendChild(option);
-            editCuentaAsociadaInput.appendChild(option.cloneNode(true));
+            if (agregando === true) {
+                option.value = cuenta.numeroCuenta;
+                option.textContent = `${cuenta.numeroCuenta} - ${cuenta.nombreBanco}`;
+                cuentaAsociadaInput.appendChild(option);
+            } else {
+                option.value = cuenta.numeroCuenta;
+                option.textContent = `${cuenta.numeroCuenta} - ${cuenta.nombreBanco}`;
+                editCuentaAsociadaInput.appendChild(option);
+            }
         }
     }
 }
@@ -211,7 +234,7 @@ function eliminarTransaccion() {
         cargarTiposYCuentas();
         buscarCodigoTransaccionInput.focus();
     } else {
-        alert('No se encontró la transacción con el código ' +  codigoTransaccion);
+        alert('No se encontró la transacción con el código ' + codigoTransaccion);
         buscarCodigoTransaccionInput.focus();
     }
 }
@@ -219,9 +242,23 @@ function eliminarTransaccion() {
 function mostrarAgregarTransaccion() {
     document.getElementById('add-trade').style.display = 'flex';
     document.getElementById('edit-trade').style.display = 'none';
+    agregando = true;
+    cargarTiposYCuentas()
 }
 
 function mostrarEditarTransaccion() {
     document.getElementById('add-trade').style.display = 'none';
     document.getElementById('edit-trade').style.display = 'flex';
+    agregando = false;
+    cargarTiposYCuentas()
 }
+
+tipoTransaccionInput.addEventListener('change', () => {
+    limpiarTiposYCuentas();
+    cargarTiposYCuentas();
+});
+
+editTipoTransaccionInput.addEventListener('change', () => {
+    limpiarTiposYCuentas();
+    cargarTiposYCuentas();
+});
