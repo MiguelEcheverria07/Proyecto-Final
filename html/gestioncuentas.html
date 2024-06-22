@@ -27,20 +27,20 @@
             </select>
         </div>
     </div>
-    <form action="../php/sumbit.php" method="post" id="form-add-account">
+    <form action="../php/submit.php" method="post" id="form-add-account">
         <div id="add-account" class="add-account">
             <div>
                 <div>
                     <span>Numero de cuenta:</span>
-                    <input type="text" id="numeroCuenta" required>
+                    <input type="text" id="numeroCuenta" name="numeroCuenta" required>
                 </div>
                 <div>
                     <span>Nombre del banco:</span>
-                    <input type="text" id="nombreBanco" required>
+                    <input type="text" id="nombreBanco" name="nombreBanco" required>
                 </div>
                 <div>
                     <span>Tipo de cuenta:</span>
-                    <select id="tipoCuenta">
+                    <select id="tipoCuenta" name="tipoCuenta">
                         <option value="Ahorros">Cuenta Corriente</option>
                         <option value="Corriente">Cuenta de ahorros</option>
                         <option value="Empresarial">Cuenta Empresarial</option>
@@ -52,45 +52,45 @@
             <div>
                 <div>
                     <span>Estado de la cuenta:</span>
-                    <input type="text" id="estadoCuenta" readonly placeholder="Activa">
+                    <input type="text" id="estadoCuenta" name="estadoCuenta" value="Activa" readonly placeholder="Activa">
                 </div>
                 <div>
                     <span>Fecha de apertura:</span>
-                    <input type="date" id="fechaCuenta">
+                    <input type="date" id="fechaCuenta" name="fechaApertura">
                 </div>
                 <div>
                     <span>Saldo actual:</span>
-                    <input type="number" id="saldoCuenta" required>
+                    <input type="number" id="saldoCuenta" name="saldo" required>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Descripción</span>
-                    <textarea id="descripcionCuenta" style="width: 200px; height: 50px;"></textarea>
+                    <textarea id="descripcionCuenta" name="descripcion" style="width: 200px; height: 50px;"></textarea>
                     <button type="submit" name="action" value="guardar">Guardar cuenta</button>
                 </div>
             </div>
         </div>
     </form>
-    <form action="#">
+    <form action="../php/update.php" id="form-edit-account">
         <div id="edit-account" class="edit-account" style="display: none;">
             <div>
                 <div>
                     <span>Ingrese el numero de cuenta:</span>
-                    <input type="text" id="buscarNumeroCuenta" required>
+                    <input type="text" id="buscarNumeroCuenta" name="numeroCuenta" required>
                 </div>
                 <div>
-                    <button type="submit" id="consultarCuentaBtn">Consultar</button>
+                    <button type="button" onclick="consultarCuenta()">Consultar</button>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Nombre del banco:</span>
-                    <input type="text" id="editNombreBanco" required>
+                    <input type="text" id="editNombreBanco" name="nombreBanco" required>
                 </div>
                 <div>
                     <span>Tipo de cuenta:</span>
-                    <select id="editTipoCuenta">
+                    <select id="editTipoCuenta" name="tipoCuenta">
                         <option value="Ahorros">Cuenta de ahorros</option>
                         <option value="Corriente">Cuenta Corriente</option>
                         <option value="Empresarial">Cuenta Empresarial</option>
@@ -100,13 +100,13 @@
                 </div>
                 <div>
                     <span>Saldo actual:</span>
-                    <input type="number" id="editSaldoCuenta" required>
+                    <input type="number" id="editSaldoCuenta" name="saldo" required>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Estado de la cuenta:</span>
-                    <select id="editEstadoCuenta">
+                    <select id="editEstadoCuenta" name="estadoCuenta">
                         <option value="Activa">Activa</option>
                         <option value="Inactiva">Inactiva</option>
                         <option value="Cerrada">Cerrada</option>
@@ -114,13 +114,13 @@
                 </div>
                 <div>
                     <span>Fecha de apertura:</span>
-                    <input type="date" id="editFechaCuenta">
+                    <input type="date" id="editFechaCuenta" name="fechaApertura">
                 </div>
             </div>
             <div>
                 <div>
                     <span>Descripción</span>
-                    <textarea id="editDescripcionCuenta" style="width: 200px; height: 50px;"></textarea>
+                    <textarea id="editDescripcionCuenta" name="descripcion" style="width: 200px; height: 50px;"></textarea>
                 </div>
                 <div>
                     <button type="submit" name="action" value="editar">Actualizar cuenta</button>
@@ -134,6 +134,9 @@
             <a href="menugeneral.html">Regresar al menú</a>
         </div>
     </div>
+    <script>
+        
+    </script>
     <script src="../js/gestioncuentas.js"></script>
     <script src="../js/temas.js"></script>
     <script src="../js/gestionalertas.js"></script>

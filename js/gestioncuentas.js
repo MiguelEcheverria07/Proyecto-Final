@@ -12,8 +12,41 @@ const editSaldoCuentaInput = document.getElementById('editSaldoCuenta');
 const editEstadoCuentaInput = document.getElementById('editEstadoCuenta');
 const editFechaCuentaInput = document.getElementById('editFechaCuenta');
 const editDescripcionCuentaInput = document.getElementById('editDescripcionCuenta');
-
 const forms = document.querySelectorAll('form');
+
+document.getElementById("form-add-account").addEventListener("submit", function (event) {
+    event.preventDefault(); 
+
+    var formData = new FormData(this);
+    fetch("../php/submit.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data); 
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+});
+
+document.getElementById("form-edit-account").addEventListener("submit", function (event) {
+    event.preventDefault(); 
+
+    var formDataE = new FormData(this);
+    fetch("../php/update.php", {
+        method: "POST",
+        body: formDataE
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data); 
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+});
 
 forms.forEach(form => {
     form.addEventListener('submit', function (event) {
@@ -42,7 +75,6 @@ document.getElementById('consultarCuentaBtn').addEventListener('click', function
         consultarCuenta();
     } 
 });
-
 
 function mostrarAgregarCuenta() {
     document.getElementById('add-account').style.display = 'flex';
@@ -153,3 +185,4 @@ function limpiarInputs() {
     editFechaCuentaInput.value = '';
     editDescripcionCuentaInput.value = '';
 }
+

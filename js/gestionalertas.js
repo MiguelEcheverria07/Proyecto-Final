@@ -36,8 +36,6 @@ formsAlertas.forEach(form => {
     });
 });
 
-
-
 function limpiarInputsAlerta() {
     codigoAlertaInput.value = '';
     tipoAlertaInput.value = 'Factura';
@@ -196,9 +194,11 @@ function programarNotificacionesExistentes() {
     });
 }
 
-document.getElementById('consultarAlertaBtn').addEventListener('click', function () {
-    const codigoAlerta = buscarCodigoAlertaInput.value;
-    if (codigoAlerta.length > 0) {
-        consultarAlerta();
-    }
-});
+if(window.location.pathname.includes('gestionalertas.html')){
+    document.getElementById('consultarAlertaBtn').addEventListener('click', function () {
+        const codigoAlerta = buscarCodigoAlertaInput.value;
+        if (codigoAlerta.length > 0) {
+            consultarAlerta();
+        }
+    });
+}
